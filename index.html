@@ -1,14 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Game Penjumlahan Pecahan</title>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -30,7 +29,7 @@ body{
 /* HEADER */
 
 .header{
-    background:white;
+    background:#fff;
     border-radius:20px;
     padding:20px;
     text-align:center;
@@ -63,10 +62,10 @@ body{
     font-weight:bold;
 }
 
-/* SOAL */
+/* QUESTION */
 
 .question{
-    background:white;
+    background:#fff;
     border-radius:20px;
     padding:18px;
     margin-top:15px;
@@ -105,7 +104,7 @@ body{
 /* PROGRESS */
 
 .progress{
-    background:white;
+    background:#fff;
     border-radius:18px;
     margin-top:15px;
     padding:15px;
@@ -148,7 +147,7 @@ body{
 /* GAME */
 
 .game-area{
-    background:white;
+    background:#fff;
     border-radius:20px;
     padding:20px;
     margin-top:15px;
@@ -170,7 +169,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:28px;
+    gap:25px;
     flex-wrap:wrap;
 }
 
@@ -203,7 +202,7 @@ canvas{
     color:#2563eb;
 }
 
-/* ANIMASI */
+/* ANIMATION AREA */
 
 .animation-wrapper{
     position:relative;
@@ -214,23 +213,22 @@ canvas{
 
 .source-box{
     position:absolute;
-    left:5%;
-    top:35px;
+    left:4%;
+    top:25px;
     width:230px;
     text-align:center;
 }
 
 .destination-box{
     position:absolute;
-    right:5%;
-    top:35px;
-    min-height:230px;
+    right:3%;
+    top:25px;
     display:flex;
-    gap:18px;
     align-items:flex-start;
-    flex-wrap:wrap;
-    max-width:55%;
     justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    width:58%;
 }
 
 .result-circle{
@@ -238,31 +236,12 @@ canvas{
     text-align:center;
 }
 
-.result-circle.appear{
-    animation:
-        appearCircle .65s
-        cubic-bezier(.2,.8,.2,1);
+.result-circle canvas{
+    width:210px;
+    height:210px;
 }
 
-@keyframes appearCircle{
-
-    0%{
-        opacity:0;
-        transform:scale(.3);
-    }
-
-    65%{
-        opacity:1;
-        transform:scale(1.08);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-/* SVG YANG BERPINDAH */
+/* SEKTOR YANG BERGERAK */
 
 .moving-sector{
     position:absolute;
@@ -271,28 +250,29 @@ canvas{
     z-index:100;
     pointer-events:none;
     overflow:visible;
-
-    opacity:0;
-
-    transform-origin:center center;
+    opacity:1;
+    transform-origin:50% 50%;
 }
+
+/* SEKTOR TERLEPAS */
 
 .moving-sector.open{
     animation:
-        openSector .45s ease-out
+        sectorOpen .4s
+        cubic-bezier(.2,.8,.2,1)
         forwards;
 }
 
-@keyframes openSector{
+@keyframes sectorOpen{
 
     0%{
         opacity:0;
         transform:scale(.96);
     }
 
-    40%{
+    45%{
         opacity:1;
-        transform:scale(1.06);
+        transform:scale(1.08);
     }
 
     100%{
@@ -301,14 +281,16 @@ canvas{
     }
 }
 
+/* SEKTOR BERGERAK */
+
 .moving-sector.move{
     animation:
-        moveSector 1.15s
-        cubic-bezier(.35,.05,.2,1)
+        sectorMove 1.15s
+        cubic-bezier(.25,.7,.2,1)
         forwards;
 }
 
-@keyframes moveSector{
+@keyframes sectorMove{
 
     0%{
         opacity:1;
@@ -317,22 +299,31 @@ canvas{
             scale(1.03);
     }
 
-    25%{
+    20%{
         transform:
             translate(
-                var(--midX),
-                var(--midY)
+                var(--x1),
+                var(--y1)
             )
             scale(1.08);
     }
 
-    70%{
+    50%{
         transform:
             translate(
-                var(--nearX),
-                var(--nearY)
+                var(--x2),
+                var(--y2)
             )
-            scale(1.02);
+            scale(1.10);
+    }
+
+    80%{
+        transform:
+            translate(
+                var(--x3),
+                var(--y3)
+            )
+            scale(1.03);
     }
 
     100%{
@@ -346,57 +337,51 @@ canvas{
     }
 }
 
-/* SAAT BAGIAN SUDAH MASUK */
+/* LINGKARAN BARU */
 
-.filled-pulse{
+.result-circle.new{
     animation:
-        filledPulse .45s ease;
+        circleAppear .6s
+        cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes filledPulse{
+@keyframes circleAppear{
+
+    0%{
+        opacity:0;
+        transform:scale(.25);
+    }
+
+    60%{
+        opacity:1;
+        transform:scale(1.08);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* BAGIAN MASUK */
+
+.result-circle.pulse{
+    animation:
+        resultPulse .45s ease;
+}
+
+@keyframes resultPulse{
 
     0%{
         transform:scale(1);
     }
 
     50%{
-        transform:scale(1.045);
+        transform:scale(1.04);
     }
 
     100%{
         transform:scale(1);
-    }
-}
-
-/* LINGKARAN BARU */
-
-.new-circle{
-    animation:
-        newCircle .65s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes newCircle{
-
-    0%{
-        opacity:0;
-        transform:
-            scale(.15)
-            translateY(25px);
-    }
-
-    65%{
-        opacity:1;
-        transform:
-            scale(1.08)
-            translateY(-3px);
-    }
-
-    100%{
-        opacity:1;
-        transform:
-            scale(1)
-            translateY(0);
     }
 }
 
@@ -470,7 +455,7 @@ button:disabled{
     color:white;
 }
 
-/* JAWABAN */
+/* ANSWER */
 
 .answer-area{
     margin-top:18px;
@@ -529,7 +514,7 @@ button:disabled{
 
 details{
     margin-top:15px;
-    background:white;
+    background:#fff;
     border-radius:15px;
     padding:15px 18px;
     box-shadow:0 4px 15px rgba(0,0,0,.06);
@@ -541,7 +526,7 @@ summary{
     font-weight:bold;
 }
 
-li,p{
+li{
     line-height:1.6;
 }
 
@@ -562,7 +547,7 @@ li,p{
     }
 
     .animation-wrapper{
-        min-height:650px;
+        min-height:690px;
     }
 
     .source-box{
@@ -576,24 +561,21 @@ li,p{
         position:relative;
         right:auto;
         top:auto;
-        max-width:100%;
         width:100%;
-        margin-top:20px;
+        margin-top:25px;
     }
 
     .plus{
         transform:rotate(90deg);
     }
-}
 
+}
 </style>
 </head>
-
 
 <body>
 
 <div class="container">
-
 
 <!-- HEADER -->
 
@@ -602,8 +584,8 @@ li,p{
     <h1>🧩 Penjumlahan Pecahan</h1>
 
     <p>
-        Perhatikan setiap bagian pecahan
-        berpindah ke bagian yang masih kosong.
+        Gabungkan pecahan dengan melihat
+        perpindahan setiap bagian.
     </p>
 
     <div class="score">
@@ -628,7 +610,7 @@ li,p{
 </div>
 
 
-<!-- SOAL -->
+<!-- QUESTION -->
 
 <div class="question">
 
@@ -698,12 +680,10 @@ li,p{
         class="instruction">
     </div>
 
-
     <div
         id="visualArea"
         class="visual-area">
     </div>
-
 
     <div class="process-box">
 
@@ -730,7 +710,6 @@ li,p{
 
         </button>
 
-
         <button
             id="combineButton"
             class="success"
@@ -740,7 +719,6 @@ li,p{
             🧩 Gabungkan
 
         </button>
-
 
         <button
             id="countButton"
@@ -755,7 +733,7 @@ li,p{
     </div>
 
 
-    <!-- JAWABAN -->
+    <!-- ANSWER -->
 
     <div
         id="answerArea"
@@ -765,7 +743,6 @@ li,p{
             ✏️ Masukkan hasil penjumlahan
         </div>
 
-
         <div class="answer-inputs">
 
             <input
@@ -774,9 +751,7 @@ li,p{
                 inputmode="numeric"
                 placeholder="?">
 
-            <span class="slash">
-                /
-            </span>
+            <span class="slash">/</span>
 
             <input
                 id="denominator"
@@ -786,7 +761,6 @@ li,p{
 
         </div>
 
-
         <button
             class="primary"
             onclick="checkAnswer()">
@@ -794,7 +768,6 @@ li,p{
             ✓ Periksa Jawaban
 
         </button>
-
 
         <button
             class="success"
@@ -804,7 +777,6 @@ li,p{
 
         </button>
 
-
         <button
             class="gray"
             onclick="resetGame()">
@@ -812,7 +784,6 @@ li,p{
             ↻ Mulai Lagi
 
         </button>
-
 
         <div
             id="feedback"
@@ -824,7 +795,7 @@ li,p{
 </div>
 
 
-<!-- PETUNJUK -->
+<!-- INSTRUCTIONS -->
 
 <details>
 
@@ -835,7 +806,18 @@ li,p{
     <ol>
 
         <li>
-            Perhatikan bagian biru dan bagian putih.
+            🔵 Biru menunjukkan bagian
+            dari pecahan pertama.
+        </li>
+
+        <li>
+            🟠 Orange menunjukkan bagian
+            dari pecahan kedua.
+        </li>
+
+        <li>
+            ⚪ Putih menunjukkan bagian
+            yang masih kosong.
         </li>
 
         <li>
@@ -847,29 +829,23 @@ li,p{
         </li>
 
         <li>
-            Perhatikan sektor <b>orange</b>
-            dibuka dari lingkaran sumber.
+            Perhatikan bagian orange
+            terbuka satu per satu.
         </li>
 
         <li>
-            Sektor orange bergerak menuju
-            <b>bagian putih yang kosong</b>.
+            Bagian orange bergerak menuju
+            <b>sektor putih</b>.
         </li>
 
         <li>
-            Setelah sampai, sektor tersebut
-            tetap berwarna <b>orange</b>.
-        </li>
-
-        <li>
-            Jika lingkaran pertama penuh,
-            lingkaran baru muncul.
+            Setelah sampai,
+            <b>orange tetap orange</b>.
         </li>
 
     </ol>
 
 </details>
-
 
 </div>
 
@@ -877,16 +853,12 @@ li,p{
 <script>
 
 /* =====================================================
-   VARIABEL
+   DATA
 ===================================================== */
 
-let n1=0;
-let d1=1;
+let n1,d1,n2,d2;
 
-let n2=0;
-let d2=1;
-
-let commonDenominator=1;
+let commonDenominator;
 
 let score=0;
 let correctCount=0;
@@ -896,6 +868,8 @@ let currentStage=1;
 
 let animationBusy=false;
 let answered=false;
+
+let animationToken=0;
 
 
 /* =====================================================
@@ -909,31 +883,49 @@ const instruction=
     document.getElementById("instruction");
 
 const processExpression=
-    document.getElementById("processExpression");
+    document.getElementById(
+        "processExpression"
+    );
 
 const visualArea=
-    document.getElementById("visualArea");
+    document.getElementById(
+        "visualArea"
+    );
 
 const equalButton=
-    document.getElementById("equalButton");
+    document.getElementById(
+        "equalButton"
+    );
 
 const combineButton=
-    document.getElementById("combineButton");
+    document.getElementById(
+        "combineButton"
+    );
 
 const countButton=
-    document.getElementById("countButton");
+    document.getElementById(
+        "countButton"
+    );
 
 const answerArea=
-    document.getElementById("answerArea");
+    document.getElementById(
+        "answerArea"
+    );
 
 const numeratorInput=
-    document.getElementById("numerator");
+    document.getElementById(
+        "numerator"
+    );
 
 const denominatorInput=
-    document.getElementById("denominator");
+    document.getElementById(
+        "denominator"
+    );
 
 const feedback=
-    document.getElementById("feedback");
+    document.getElementById(
+        "feedback"
+    );
 
 
 /* =====================================================
@@ -958,12 +950,12 @@ function gcd(a,b){
     a=Math.abs(a);
     b=Math.abs(b);
 
-    while(b!==0){
+    while(b){
 
-        const temp=a%b;
-
-        a=b;
-        b=temp;
+        [a,b]=[
+            b,
+            a%b
+        ];
 
     }
 
@@ -978,11 +970,12 @@ function gcd(a,b){
 function lcm(a,b){
 
     return Math.abs(a*b)/gcd(a,b);
+
 }
 
 
 /* =====================================================
-   SEDERHANAKAN
+   SIMPLIFY
 ===================================================== */
 
 function simplify(num,den){
@@ -998,7 +991,7 @@ function simplify(num,den){
 
 
 /* =====================================================
-   FRACTION HTML
+   FRACTION
 ===================================================== */
 
 function fractionHTML(num,den){
@@ -1014,17 +1007,20 @@ function fractionHTML(num,den){
 
 
 /* =====================================================
-   RANDOM FRACTION
+   RANDOM
 ===================================================== */
 
 function randomFraction(){
 
     const denominator=
-        Math.floor(Math.random()*4)+2;
+        Math.floor(
+            Math.random()*4
+        )+2;
 
     const numerator=
         Math.floor(
-            Math.random()*(denominator-1)
+            Math.random()*
+            (denominator-1)
         )+1;
 
     return{
@@ -1036,7 +1032,7 @@ function randomFraction(){
 
 
 /* =====================================================
-   SOAL BARU
+   CREATE QUESTION
 ===================================================== */
 
 function createQuestion(){
@@ -1057,7 +1053,7 @@ function createQuestion(){
 
 
 /* =====================================================
-   RESET STEP
+   RESET STEPS
 ===================================================== */
 
 function resetSteps(){
@@ -1069,10 +1065,7 @@ function resetSteps(){
                 "step"+i
             );
 
-        step.classList.remove(
-            "active",
-            "done"
-        );
+        step.className="step";
 
     }
 
@@ -1084,37 +1077,31 @@ function resetSteps(){
 
 
 /* =====================================================
-   SOAL BARU
+   NEW QUESTION
 ===================================================== */
 
 function newQuestion(){
 
+    animationToken++;
+
     currentStage=1;
 
     animationBusy=false;
-
     answered=false;
 
     resetSteps();
-
 
     equalButton.disabled=false;
     combineButton.disabled=true;
     countButton.disabled=true;
 
+    answerArea.classList.add("hidden");
 
     numeratorInput.value="";
     denominatorInput.value="";
 
-
-    answerArea.classList.add(
-        "hidden"
-    );
-
-
     feedback.textContent="";
     feedback.className="feedback";
-
 
     createQuestion();
 
@@ -1143,7 +1130,7 @@ function newQuestion(){
 
 
 /* =====================================================
-   GAMBAR AWAL
+   INITIAL
 ===================================================== */
 
 function drawInitial(){
@@ -1194,18 +1181,28 @@ function drawInitial(){
     `;
 
 
-    drawCircle(
+    drawMixedCircle(
         "circle1",
-        n1,
         d1,
-        "#3b82f6"
+        Array.from(
+            {length:n1},
+            (_,i)=>i
+        ),
+        [],
+        "#3b82f6",
+        "#f97316"
     );
 
 
-    drawCircle(
+    drawMixedCircle(
         "circle2",
-        n2,
         d2,
+        [],
+        Array.from(
+            {length:n2},
+            (_,i)=>i
+        ),
+        "#3b82f6",
         "#f97316"
     );
 
@@ -1213,14 +1210,16 @@ function drawInitial(){
 
 
 /* =====================================================
-   GAMBAR LINGKARAN
+   DRAW MIXED CIRCLE
 ===================================================== */
 
-function drawCircle(
+function drawMixedCircle(
     id,
-    numerator,
     denominator,
-    color
+    blueIndices,
+    orangeIndices,
+    blueColor="#3b82f6",
+    orangeColor="#f97316"
 ){
 
     const canvas=
@@ -1228,45 +1227,17 @@ function drawCircle(
 
     if(!canvas) return;
 
-
     const ctx=
         canvas.getContext("2d");
+
+    ctx.clearRect(
+        0,0,500,500
+    );
 
 
     const cx=250;
     const cy=250;
     const radius=215;
-
-
-    ctx.clearRect(
-        0,
-        0,
-        500,
-        500
-    );
-
-
-    /*
-       DASAR PUTIH
-    */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        cx,
-        cy,
-        radius,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fillStyle="#ffffff";
-    ctx.fill();
-
-
-    /*
-       BAGIAN BERWARNA
-    */
 
     const slice=
         Math.PI*2/denominator;
@@ -1275,44 +1246,9 @@ function drawCircle(
         -Math.PI/2;
 
 
-    for(
-        let i=0;
-        i<numerator;
-        i++
-    ){
-
-        ctx.beginPath();
-
-        ctx.moveTo(cx,cy);
-
-        ctx.arc(
-            cx,
-            cy,
-            radius,
-            start+i*slice,
-            start+(i+1)*slice
-        );
-
-        ctx.closePath();
-
-        ctx.fillStyle=color;
-
-        ctx.globalAlpha=.82;
-
-        ctx.fill();
-
-        ctx.globalAlpha=1;
-
-    }
-
-
     /*
-       GARIS PEMBAGI
+       SEMUA BAGIAN DIMULAI PUTIH
     */
-
-    ctx.strokeStyle="#334155";
-    ctx.lineWidth=4;
-
 
     for(
         let i=0;
@@ -1320,18 +1256,26 @@ function drawCircle(
         i++
     ){
 
-        const angle=
+        const a1=
             start+i*slice;
 
-
-        const x=
-            cx+
-            radius*Math.cos(angle);
+        const a2=
+            start+(i+1)*slice;
 
 
-        const y=
-            cy+
-            radius*Math.sin(angle);
+        let color="#ffffff";
+
+        if(
+            blueIndices.includes(i)
+        ){
+            color=blueColor;
+        }
+
+        if(
+            orangeIndices.includes(i)
+        ){
+            color=orangeColor;
+        }
 
 
         ctx.beginPath();
@@ -1341,9 +1285,49 @@ function drawCircle(
             cy
         );
 
+        ctx.arc(
+            cx,
+            cy,
+            radius,
+            a1,
+            a2
+        );
+
+        ctx.closePath();
+
+        ctx.fillStyle=color;
+
+        ctx.globalAlpha=
+            color==="#ffffff"
+            ?1
+            :.84;
+
+        ctx.fill();
+
+        ctx.globalAlpha=1;
+
+
+        /*
+           GARIS PEMISAH
+        */
+
+        ctx.strokeStyle="#334155";
+        ctx.lineWidth=4;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            cx,
+            cy
+        );
+
         ctx.lineTo(
-            x,
-            y
+            cx+
+            radius*
+            Math.cos(a1),
+            cy+
+            radius*
+            Math.sin(a1)
         );
 
         ctx.stroke();
@@ -1365,25 +1349,26 @@ function drawCircle(
         Math.PI*2
     );
 
+    ctx.strokeStyle="#334155";
+    ctx.lineWidth=4;
+
     ctx.stroke();
 
 }
 
 
 /* =====================================================
-   TAHAP 2
+   EQUALIZE
 ===================================================== */
 
 async function equalizeDenominator(){
 
     if(
-        currentStage!==1
-        ||
+        currentStage!==1 ||
         animationBusy
     ){
         return;
     }
-
 
     animationBusy=true;
 
@@ -1394,7 +1379,6 @@ async function equalizeDenominator(){
         n1*
         (commonDenominator/d1);
 
-
     const newN2=
         n2*
         (commonDenominator/d2);
@@ -1402,53 +1386,34 @@ async function equalizeDenominator(){
 
     instruction.innerHTML=`
         🔄 <b>Tahap 2:</b>
-        Kedua lingkaran dibagi menjadi
+        Sekarang kedua pecahan mempunyai
         jumlah bagian yang sama.
     `;
 
 
-    const c1=
-        document.getElementById("circle1");
-
-    const c2=
-        document.getElementById("circle2");
+    await wait(350);
 
 
-    c1.style.transition=
-        "transform .3s";
-
-    c2.style.transition=
-        "transform .3s";
-
-
-    c1.style.transform=
-        "scale(1.05)";
-
-    c2.style.transform=
-        "scale(1.05)";
-
-
-    await wait(300);
-
-
-    drawCircle(
+    drawMixedCircle(
         "circle1",
-        newN1,
         commonDenominator,
-        "#3b82f6"
+        Array.from(
+            {length:newN1},
+            (_,i)=>i
+        ),
+        []
     );
 
 
-    drawCircle(
+    drawMixedCircle(
         "circle2",
-        newN2,
         commonDenominator,
-        "#f97316"
+        [],
+        Array.from(
+            {length:newN2},
+            (_,i)=>i
+        )
     );
-
-
-    c1.style.transform="scale(1)";
-    c2.style.transform="scale(1)";
 
 
     processExpression.innerHTML=
@@ -1471,14 +1436,12 @@ async function equalizeDenominator(){
         .getElementById("step1")
         .classList.add("done");
 
-
     document
         .getElementById("step2")
         .classList.add("active");
 
 
     equalButton.disabled=true;
-
     combineButton.disabled=false;
 
     animationBusy=false;
@@ -1487,13 +1450,12 @@ async function equalizeDenominator(){
 
 
 /* =====================================================
-   BUAT SVG SEKTOR
+   CREATE MOVING SECTOR
 ===================================================== */
 
-function createSector(
+function createMovingSector(
     denominator,
-    index,
-    color="#f97316"
+    index
 ){
 
     const svg=
@@ -1502,12 +1464,10 @@ function createSector(
             "svg"
         );
 
-
     svg.setAttribute(
         "viewBox",
         "0 0 500 500"
     );
-
 
     svg.classList.add(
         "moving-sector"
@@ -1523,82 +1483,72 @@ function createSector(
 
     const cx=250;
     const cy=250;
-    const r=215;
+    const radius=215;
 
+    const slice=
+        Math.PI*2/denominator;
 
     const start=
         -Math.PI/2+
-        index*
-        (Math.PI*2/denominator);
-
+        index*slice;
 
     const end=
-        -Math.PI/2+
-        (index+1)*
-        (Math.PI*2/denominator);
+        start+slice;
 
 
     const x1=
-        cx+r*Math.cos(start);
+        cx+
+        radius*Math.cos(start);
 
     const y1=
-        cy+r*Math.sin(start);
+        cy+
+        radius*Math.sin(start);
 
     const x2=
-        cx+r*Math.cos(end);
+        cx+
+        radius*Math.cos(end);
 
     const y2=
-        cy+r*Math.sin(end);
+        cy+
+        radius*Math.sin(end);
 
 
     const largeArc=
-        (end-start)>Math.PI
+        slice>Math.PI
         ?1
         :0;
 
 
-    const pathData=`
-
+    const d=`
         M ${cx} ${cy}
-
         L ${x1} ${y1}
-
-        A ${r} ${r}
-        0 ${largeArc} 1
-        ${x2} ${y2}
-
+        A ${radius} ${radius}
+          0 ${largeArc} 1
+          ${x2} ${y2}
         Z
     `;
 
 
-    path.setAttribute(
-        "d",
-        pathData
-    );
-
+    path.setAttribute("d",d);
 
     /*
-       PENTING:
-       WARNA ORANGE TETAP ORANGE
+       WARNA ORANGE TETAP
     */
 
     path.setAttribute(
         "fill",
-        color
+        "#f97316"
     );
-
 
     path.setAttribute(
         "fill-opacity",
-        "0.88"
+        ".9"
     );
-
 
     path.setAttribute(
         "stroke",
         "#334155"
     );
-
 
     path.setAttribute(
         "stroke-width",
@@ -1608,68 +1558,47 @@ function createSector(
 
     svg.appendChild(path);
 
-
     return svg;
 
 }
 
 
 /* =====================================================
-   BUAT LINGKARAN HASIL
+   GET CANVAS POSITION
 ===================================================== */
 
-function createResultCircle(
-    index,
-    filled,
-    denominator
+function getCanvasTopLeft(
+    canvas,
+    wrapper
 ){
 
-    const box=
-        document.createElement(
-            "div"
-        );
+    const rect=
+        canvas.getBoundingClientRect();
 
-
-    box.className=
-        "result-circle";
-
-
-    const canvasId=
-        "result_"+index;
-
-
-    box.innerHTML=`
-
-        <div class="circle-title">
-            Lingkaran ${index+1}
-        </div>
-
-        <canvas
-            id="${canvasId}"
-            width="500"
-            height="500">
-        </canvas>
-
-        <div class="circle-info">
-            ${filled}/${denominator}
-        </div>
-    `;
+    const wrapperRect=
+        wrapper.getBoundingClientRect();
 
 
     return{
-        element:box,
-        canvasId:canvasId,
-        filled:filled
+
+        x:
+            rect.left-
+            wrapperRect.left,
+
+        y:
+            rect.top-
+            wrapperRect.top
+
     };
 
 }
 
 
 /* =====================================================
-   POSISI SEKTOR
+   GET SECTOR CENTER POSITION
 ===================================================== */
 
-function getSectorPosition(
+function getSectorCenter(
     canvas,
     sectorIndex,
     denominator,
@@ -1683,13 +1612,6 @@ function getSectorPosition(
         wrapper.getBoundingClientRect();
 
 
-    /*
-       Kita tidak mengarahkan sektor
-       ke tengah lingkaran.
-
-       Kita arahkan ke pusat sektor putih.
-    */
-
     const cx=
         rect.left-
         wrapperRect.left+
@@ -1702,8 +1624,13 @@ function getSectorPosition(
         rect.height/2;
 
 
+    /*
+       Jarak ke bagian tengah
+       sektor putih.
+    */
+
     const radius=
-        rect.width*.30;
+        rect.width*.31;
 
 
     const angle=
@@ -1716,15 +1643,11 @@ function getSectorPosition(
 
         x:
             cx+
-            radius*Math.cos(angle)
-            -
-            rect.width/2,
+            radius*Math.cos(angle),
 
         y:
             cy+
             radius*Math.sin(angle)
-            -
-            rect.height/2
 
     };
 
@@ -1732,10 +1655,11 @@ function getSectorPosition(
 
 
 /* =====================================================
-   ANIMASI SATU SEKTOR
+   MOVE ONE SECTOR
 ===================================================== */
 
 async function moveOneSector(
+    token,
     wrapper,
     sourceCanvas,
     sourceIndex,
@@ -1743,21 +1667,26 @@ async function moveOneSector(
     circles
 ){
 
+    if(token!==animationToken){
+        return false;
+    }
+
+
     /*
-       Cari lingkaran pertama
-       yang masih memiliki bagian putih.
+       Cari lingkaran yang
+       masih mempunyai bagian putih.
     */
 
     let target=
         circles.find(
-            circle=>
-                circle.filled<
+            c=>
+                c.filled<
                 denominator
         );
 
 
     /*
-       Jika tidak ada bagian putih,
+       Jika semua penuh,
        buat lingkaran baru.
     */
 
@@ -1767,34 +1696,73 @@ async function moveOneSector(
             circles.length;
 
 
-        target=
-            createResultCircle(
-                index,
-                0,
-                denominator
+        const box=
+            document.createElement(
+                "div"
             );
+
+
+        box.className=
+            "result-circle new";
+
+
+        const canvasId=
+            "result_"+index;
+
+
+        box.innerHTML=`
+
+            <div class="circle-title">
+                Lingkaran ${index+1}
+            </div>
+
+            <canvas
+                id="${canvasId}"
+                width="500"
+                height="500">
+            </canvas>
+
+            <div class="circle-info">
+                0/${denominator}
+            </div>
+        `;
 
 
         document
             .getElementById(
                 "destinationBox"
             )
-            .appendChild(
-                target.element
-            );
+            .appendChild(box);
+
+
+        drawMixedCircle(
+            canvasId,
+            denominator,
+            [],
+            []
+        );
+
+
+        target={
+            element:box,
+            canvasId:canvasId,
+            filled:0,
+            blueIndices:[],
+            orangeIndices:[]
+        };
 
 
         circles.push(target);
 
 
-        await wait(600);
+        await wait(550);
 
     }
 
 
     /*
-       Sektor tujuan adalah
-       sektor putih pertama.
+       TARGET:
+       bagian putih pertama.
     */
 
     const targetIndex=
@@ -1808,71 +1776,23 @@ async function moveOneSector(
 
 
     /*
-       Buat sektor orange
-       dari lingkaran sumber.
+       SEKTOR SUMBER
     */
 
-    const sector=
-        createSector(
-            denominator,
-            sourceIndex,
-            "#f97316"
+    const sourcePosition=
+        getCanvasTopLeft(
+            sourceCanvas,
+            wrapper
         );
 
 
-    wrapper.appendChild(
-        sector
-    );
-
-
     /*
-       Posisi awal tepat di atas
-       sektor sumber.
+       SEKTOR TUJUAN:
+       TEPAT DI POSISI BAGIAN PUTIH.
     */
 
-    const sourceRect=
-        sourceCanvas.getBoundingClientRect();
-
-    const wrapperRect=
-        wrapper.getBoundingClientRect();
-
-
-    const sourceX=
-        sourceRect.left-
-        wrapperRect.left;
-
-
-    const sourceY=
-        sourceRect.top-
-        wrapperRect.top;
-
-
-    sector.style.left=
-        sourceX+"px";
-
-    sector.style.top=
-        sourceY+"px";
-
-
-    /*
-       Buka sektor terlebih dahulu.
-    */
-
-    sector.classList.add(
-        "open"
-    );
-
-
-    await wait(450);
-
-
-    /*
-       Cari posisi sektor putih
-       pada lingkaran tujuan.
-    */
-
-    const targetPos=
-        getSectorPosition(
+    const targetCenter=
+        getSectorCenter(
             targetCanvas,
             targetIndex,
             denominator,
@@ -1881,58 +1801,157 @@ async function moveOneSector(
 
 
     /*
-       Posisi relatif terhadap
-       posisi awal sektor.
+       Posisi awal SVG adalah
+       top-left lingkaran sumber.
     */
 
-    const endX=
-        targetPos.x-
-        sourceX;
+    const startX=
+        sourcePosition.x;
 
-
-    const endY=
-        targetPos.y-
-        sourceY;
+    const startY=
+        sourcePosition.y;
 
 
     /*
-       Titik tengah lintasan.
+       Agar sektor yang bergerak
+       berpusat tepat pada sektor
+       tujuan, kita geser setengah
+       ukuran SVG.
     */
 
-    const midX=
-        endX*.5;
-
-    const midY=
-        endY*.5-45;
+    const targetX=
+        targetCenter.x-
+        105;
 
 
-    sector.style.setProperty(
-        "--endX",
-        endX+"px"
+    const targetY=
+        targetCenter.y-
+        105;
+
+
+    const endX=
+        targetX-
+        startX;
+
+    const endY=
+        targetY-
+        startY;
+
+
+    /*
+       Lintasan melengkung.
+    */
+
+    const x1=
+        endX*.22;
+
+    const y1=
+        endY*.22-25;
+
+    const x2=
+        endX*.52;
+
+    const y2=
+        endY*.52-55;
+
+    const x3=
+        endX*.80;
+
+    const y3=
+        endY*.80-20;
+
+
+    /*
+       BUAT SEKTOR ORANGE.
+    */
+
+    const moving=
+        createMovingSector(
+            denominator,
+            sourceIndex
+        );
+
+
+    moving.style.left=
+        startX+"px";
+
+    moving.style.top=
+        startY+"px";
+
+
+    wrapper.appendChild(
+        moving
     );
 
-    sector.style.setProperty(
-        "--endY",
-        endY+"px"
-    );
 
-    sector.style.setProperty(
-        "--midX",
-        midX+"px"
-    );
+    /*
+       1. SEKTOR TERBUKA
+    */
 
-    sector.style.setProperty(
-        "--midY",
-        midY+"px"
-    );
-
-
-    sector.classList.remove(
+    moving.classList.add(
         "open"
     );
 
 
-    sector.classList.add(
+    await wait(420);
+
+
+    if(token!==animationToken){
+        moving.remove();
+        return false;
+    }
+
+
+    /*
+       2. SEKTOR BERGERAK
+    */
+
+    moving.style.setProperty(
+        "--x1",
+        x1+"px"
+    );
+
+    moving.style.setProperty(
+        "--y1",
+        y1+"px"
+    );
+
+    moving.style.setProperty(
+        "--x2",
+        x2+"px"
+    );
+
+    moving.style.setProperty(
+        "--y2",
+        y2+"px"
+    );
+
+    moving.style.setProperty(
+        "--x3",
+        x3+"px"
+    );
+
+    moving.style.setProperty(
+        "--y3",
+        y3+"px"
+    );
+
+    moving.style.setProperty(
+        "--endX",
+        endX+"px"
+    );
+
+    moving.style.setProperty(
+        "--endY",
+        endY+"px"
+    );
+
+
+    moving.classList.remove(
+        "open"
+    );
+
+    moving.classList.add(
         "move"
     );
 
@@ -1940,28 +1959,35 @@ async function moveOneSector(
     await wait(1150);
 
 
-    /*
-       SEKARANG sektor orange
-       sudah berada di bagian putih.
+    if(token!==animationToken){
+        moving.remove();
+        return false;
+    }
 
-       Tambahkan sektor tersebut
-       sebagai ORANGE.
+
+    /*
+       3. SEKTOR SUDAH SAMPAI.
+
+       Tambahkan ORANGE ke
+       sektor putih tujuan.
+
+       WARNA BIRU TIDAK DISENTUH.
     */
+
+    target.orangeIndices.push(
+        targetIndex
+    );
 
     target.filled++;
 
 
-    drawCircle(
+    drawMixedCircle(
         target.canvasId,
-        target.filled,
         denominator,
-        "#f97316"
+        target.blueIndices,
+        target.orangeIndices
     );
 
-
-    /*
-       Update tulisan.
-    */
 
     target.element
         .querySelector(
@@ -1971,40 +1997,38 @@ async function moveOneSector(
         `${target.filled}/${denominator}`;
 
 
-    /*
-       Efek ketika sektor masuk.
-    */
-
     target.element.classList.add(
-        "filled-pulse"
+        "pulse"
     );
 
 
-    await wait(300);
+    await wait(350);
 
 
     target.element.classList.remove(
-        "filled-pulse"
+        "pulse"
     );
 
 
-    sector.remove();
+    moving.remove();
 
 
-    await wait(220);
+    await wait(180);
+
+
+    return true;
 
 }
 
 
 /* =====================================================
-   TAHAP 3
+   COMBINE
 ===================================================== */
 
 async function combineFractions(){
 
     if(
-        currentStage!==2
-        ||
+        currentStage!==2 ||
         animationBusy
     ){
         return;
@@ -2030,11 +2054,15 @@ async function combineFractions(){
         commonDenominator;
 
 
+    const token=
+        ++animationToken;
+
+
     instruction.innerHTML=`
         🧩 <b>Tahap 3:</b>
         Perhatikan bagian orange.
-        Setiap bagian akan dilepas lalu
-        mengisi bagian putih yang kosong.
+        Bagian tersebut akan masuk
+        satu per satu ke bagian putih.
     `;
 
 
@@ -2056,20 +2084,19 @@ async function combineFractions(){
 
 
     /*
-       Area animasi.
+       AREA ANIMASI
     */
 
     visualArea.innerHTML=`
 
         <div
-            class="animation-wrapper"
-            id="animationWrapper">
-
+            id="animationWrapper"
+            class="animation-wrapper">
 
             <div class="source-box">
 
                 <div class="circle-title">
-                    Pecahan Kedua
+                    Pecahan Kedua 🟠
                 </div>
 
                 <canvas
@@ -2106,28 +2133,57 @@ async function combineFractions(){
         );
 
 
-    drawCircle(
+    /*
+       SOURCE SEMUA ORANGE
+    */
+
+    let remainingSource=
+        Array.from(
+            {length:second},
+            (_,i)=>i
+        );
+
+
+    drawMixedCircle(
         "sourceCanvas",
-        second,
         denominator,
-        "#f97316"
+        [],
+        remainingSource
     );
 
 
     /*
-       Lingkaran pertama hasil
-       dimulai dari pecahan pertama.
+       LINGKARAN HASIL PERTAMA.
 
-       BAGIAN YANG SUDAH TERISI
-       tetap biru.
+       Biru harus tetap biru.
     */
 
-    const firstCircle=
-        createResultCircle(
-            0,
-            first,
-            denominator
+    const firstCircleBox=
+        document.createElement(
+            "div"
         );
+
+
+    firstCircleBox.className=
+        "result-circle";
+
+
+    firstCircleBox.innerHTML=`
+
+        <div class="circle-title">
+            Hasil
+        </div>
+
+        <canvas
+            id="result_0"
+            width="500"
+            height="500">
+        </canvas>
+
+        <div class="circle-info">
+            ${first}/${denominator}
+        </div>
+    `;
 
 
     document
@@ -2135,26 +2191,42 @@ async function combineFractions(){
             "destinationBox"
         )
         .appendChild(
-            firstCircle.element
+            firstCircleBox
         );
 
 
-    drawCircle(
-        firstCircle.canvasId,
-        first,
+    const blueIndices=
+        Array.from(
+            {length:first},
+            (_,i)=>i
+        );
+
+
+    drawMixedCircle(
+        "result_0",
         denominator,
-        "#3b82f6"
+        blueIndices,
+        []
     );
 
 
-    const circles=[
-        firstCircle
-    ];
+    const circles=[{
+
+        element:firstCircleBox,
+
+        canvasId:"result_0",
+
+        filled:first,
+
+        blueIndices:blueIndices,
+
+        orangeIndices:[]
+
+    }];
 
 
     /*
-       Pindahkan setiap bagian
-       dari pecahan kedua.
+       PINDAHKAN SATU PER SATU.
     */
 
     for(
@@ -2163,27 +2235,71 @@ async function combineFractions(){
         i++
     ){
 
-        await moveOneSector(
-            wrapper,
-            sourceCanvas,
-            i,
+        if(token!==animationToken){
+            return;
+        }
+
+
+        /*
+           Hapus sektor orange
+           dari sumber terlebih dahulu.
+
+           Jadi terlihat bahwa sektor
+           benar-benar "dibuka".
+        */
+
+        remainingSource=
+            remainingSource.filter(
+                index=>index!==i
+            );
+
+
+        drawMixedCircle(
+            "sourceCanvas",
             denominator,
-            circles
+            [],
+            remainingSource
         );
+
+
+        await wait(180);
+
+
+        /*
+           Sektor orange bergerak.
+        */
+
+        const success=
+            await moveOneSector(
+                token,
+                wrapper,
+                sourceCanvas,
+                i,
+                denominator,
+                circles
+            );
+
+
+        if(!success){
+            return;
+        }
 
     }
 
 
-    /*
-       Pastikan semua selesai.
-    */
+    await wait(400);
 
-    await wait(500);
+
+    if(token!==animationToken){
+        return;
+    }
 
 
     instruction.innerHTML=`
-        🎉 Semua bagian orange sudah mengisi
-        bagian putih yang tersedia.
+        🎉 <b>Penggabungan selesai!</b>
+        Biru tetap menunjukkan pecahan pertama,
+        sedangkan orange menunjukkan bagian
+        yang ditambahkan.
     `;
 
 
@@ -2213,14 +2329,13 @@ async function combineFractions(){
 
 
 /* =====================================================
-   TAHAP 4
+   COUNTING
 ===================================================== */
 
 function showCounting(){
 
     if(
-        currentStage!==3
-        ||
+        currentStage!==3 ||
         animationBusy
     ){
         return;
@@ -2232,19 +2347,21 @@ function showCounting(){
 
     instruction.innerHTML=`
         🔢 <b>Tahap 4:</b>
-        Hitung semua bagian yang berwarna
-        pada seluruh lingkaran.
+        Sekarang hitung seluruh bagian
+        biru dan orange.
     `;
 
 
     processExpression.innerHTML=
         fractionHTML(
-            n1*(commonDenominator/d1),
+            n1*
+            (commonDenominator/d1),
             commonDenominator
         )
         +" + "
         +fractionHTML(
-            n2*(commonDenominator/d2),
+            n2*
+            (commonDenominator/d2),
             commonDenominator
         )
         +" = ?";
@@ -2270,7 +2387,7 @@ function showCounting(){
 
 
 /* =====================================================
-   CEK JAWABAN
+   CHECK ANSWER
 ===================================================== */
 
 function checkAnswer(){
@@ -2285,7 +2402,6 @@ function checkAnswer(){
             numeratorInput.value
         );
 
-
     const userDen=
         parseInt(
             denominatorInput.value
@@ -2293,10 +2409,8 @@ function checkAnswer(){
 
 
     if(
-        isNaN(userNum)
-        ||
-        isNaN(userDen)
-        ||
+        isNaN(userNum) ||
+        isNaN(userDen) ||
         userDen===0
     ){
 
@@ -2312,7 +2426,8 @@ function checkAnswer(){
 
 
     const resultNum=
-        n1*d2+n2*d1;
+        n1*d2+
+        n2*d1;
 
 
     const resultDen=
@@ -2335,16 +2450,13 @@ function checkAnswer(){
 
     if(
         user.numerator===
-        result.numerator
-        &&
+        result.numerator &&
         user.denominator===
         result.denominator
     ){
 
         score+=10;
-
         correctCount++;
-
         answered=true;
 
 
@@ -2398,11 +2510,10 @@ function checkAnswer(){
             correctCount;
 
     }
-
     else{
 
         feedback.textContent=
-            "❌ Belum tepat. Hitung kembali semua bagian.";
+            "❌ Belum tepat. Coba hitung kembali.";
 
         feedback.className=
             "feedback wrong";
@@ -2413,7 +2524,7 @@ function checkAnswer(){
 
 
 /* =====================================================
-   SOAL BERIKUTNYA
+   NEXT
 ===================================================== */
 
 function nextQuestion(){
@@ -2422,7 +2533,9 @@ function nextQuestion(){
 
 
     document
-        .getElementById("questionNumber")
+        .getElementById(
+            "questionNumber"
+        )
         .textContent=
         questionNumber;
 
@@ -2437,6 +2550,9 @@ function nextQuestion(){
 ===================================================== */
 
 function resetGame(){
+
+    animationToken++;
+
 
     score=0;
     correctCount=0;
@@ -2464,7 +2580,7 @@ function resetGame(){
 
 
 /* =====================================================
-   MULAI
+   START
 ===================================================== */
 
 newQuestion();
@@ -2473,3 +2589,4 @@ newQuestion();
 
 </body>
 </html>
+```

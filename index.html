@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Game Penjumlahan Pecahan</title>
+<title>Game Penjumlahan Pecahan Animasi</title>
 
 <style>
 
@@ -17,14 +17,13 @@
 body{
     margin:0;
     min-height:100vh;
-    font-family:Arial, Helvetica, sans-serif;
-    background:
-        linear-gradient(
-            135deg,
-            #dbeafe,
-            #eff6ff,
-            #f8fafc
-        );
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(
+        135deg,
+        #dbeafe,
+        #eff6ff,
+        #f8fafc
+    );
     color:#1e293b;
 }
 
@@ -33,9 +32,7 @@ body{
     margin:20px auto;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
     background:white;
@@ -71,9 +68,7 @@ body{
     font-weight:bold;
 }
 
-/* =========================
-   SOAL
-========================= */
+/* SOAL */
 
 .question{
     background:white;
@@ -94,9 +89,7 @@ body{
     margin-top:10px;
 }
 
-/* =========================
-   FRACTION
-========================= */
+/* FRACTION */
 
 .fraction{
     display:inline-flex;
@@ -116,9 +109,7 @@ body{
     padding:3px 6px 0;
 }
 
-/* =========================
-   PROGRESS
-========================= */
+/* PROGRESS */
 
 .progress{
     background:white;
@@ -161,9 +152,7 @@ body{
     color:white;
 }
 
-/* =========================
-   GAME AREA
-========================= */
+/* GAME */
 
 .game-area{
     background:white;
@@ -181,9 +170,7 @@ body{
     min-height:55px;
 }
 
-/* =========================
-   VISUAL AREA
-========================= */
+/* VISUAL AREA */
 
 .visual-area{
     display:flex;
@@ -192,11 +179,27 @@ body{
     gap:25px;
     flex-wrap:wrap;
     margin-top:10px;
+    min-height:280px;
 }
 
 .circle-box{
     text-align:center;
-    min-width:240px;
+    min-width:230px;
+    animation:fadeIn .45s ease;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:scale(.85);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
 }
 
 .circle-title{
@@ -206,10 +209,10 @@ body{
 }
 
 canvas{
-    width:220px;
-    height:220px;
-    max-width:70vw;
-    max-height:70vw;
+    width:210px;
+    height:210px;
+    max-width:65vw;
+    max-height:65vw;
     display:block;
     margin:auto;
     background:white;
@@ -227,34 +230,39 @@ canvas{
     font-weight:bold;
 }
 
-/* =========================
-   HASIL BANYAK LINGKARAN
-========================= */
+/* COMBINATION */
 
-.combined-area{
+.combination-area{
+    width:100%;
+    min-height:260px;
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:20px;
+    gap:25px;
     flex-wrap:wrap;
-    width:100%;
+    position:relative;
 }
 
 .result-circle{
     text-align:center;
-    animation:appear .4s ease;
+    animation:newCircle .65s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes appear{
+@keyframes newCircle{
 
-    from{
+    0%{
         opacity:0;
-        transform:scale(.7);
+        transform:scale(.15) translateY(40px);
     }
 
-    to{
+    60%{
         opacity:1;
-        transform:scale(1);
+        transform:scale(1.08) translateY(-5px);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1) translateY(0);
     }
 
 }
@@ -269,9 +277,71 @@ canvas{
     margin-top:5px;
 }
 
-/* =========================
-   PROCESS
-========================= */
+/* ANIMATION */
+
+.animation-stage{
+    position:relative;
+    width:100%;
+    min-height:280px;
+}
+
+.source-area{
+    position:absolute;
+    left:5%;
+    top:30px;
+    width:230px;
+}
+
+.target-area{
+    position:absolute;
+    right:5%;
+    top:30px;
+    width:230px;
+}
+
+.moving-piece{
+    position:absolute;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:20;
+    opacity:0;
+}
+
+.move-piece{
+    animation:movePiece 1.1s cubic-bezier(.35,.1,.25,1) forwards;
+}
+
+@keyframes movePiece{
+
+    0%{
+        opacity:0;
+        transform:translate(
+            var(--startX),
+            var(--startY)
+        ) scale(.65);
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    75%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(
+            var(--endX),
+            var(--endY)
+        ) scale(.9);
+    }
+
+}
+
+/* PROCESS */
 
 .process-box{
     background:#f8fafc;
@@ -293,9 +363,7 @@ canvas{
     min-height:45px;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 
 .buttons{
     text-align:center;
@@ -344,9 +412,7 @@ button:disabled{
     color:white;
 }
 
-/* =========================
-   ANSWER
-========================= */
+/* ANSWER */
 
 .answer-area{
     margin-top:20px;
@@ -406,9 +472,7 @@ button:disabled{
     color:#dc2626;
 }
 
-/* =========================
-   PETUNJUK
-========================= */
+/* DETAILS */
 
 details{
     background:white;
@@ -429,9 +493,7 @@ details p{
     line-height:1.6;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:650px){
 
@@ -454,16 +516,55 @@ details p{
     }
 
     canvas{
-        width:190px;
-        height:190px;
+        width:180px;
+        height:180px;
     }
 
     .circle-box{
-        min-width:210px;
+        min-width:200px;
     }
 
     .process-expression{
         font-size:21px;
+    }
+
+    .source-area,
+    .target-area{
+        position:relative;
+        left:auto;
+        right:auto;
+        top:auto;
+        width:100%;
+        margin:10px auto;
+    }
+
+    .animation-stage{
+        min-height:500px;
+    }
+
+}
+
+
+/* =========================================
+   KELAS UNTUK ANIMASI PEMBAGIAN
+========================================= */
+
+.partition-animation{
+    animation:partitionPulse .8s ease;
+}
+
+@keyframes partitionPulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
     }
 
 }
@@ -478,16 +579,15 @@ details p{
 <div class="container">
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <div class="header">
 
     <h1>🍕 Penjumlahan Pecahan</h1>
 
     <p>
-        Pelajari penjumlahan pecahan melalui potongan-potongan lingkaran.
+        Lihat bagaimana bagian-bagian pecahan
+        bergabung menjadi satu kesatuan.
     </p>
 
     <div class="score">
@@ -512,9 +612,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     SOAL
-========================= -->
+<!-- SOAL -->
 
 <div class="question">
 
@@ -530,9 +628,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     PROGRESS
-========================= -->
+<!-- PROGRESS -->
 
 <div class="progress">
 
@@ -567,9 +663,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     GAME
-========================= -->
+<!-- GAME -->
 
 <div class="game-area">
 
@@ -578,8 +672,6 @@ details p{
         id="instruction">
     </div>
 
-
-    <!-- VISUAL -->
 
     <div
         class="visual-area"
@@ -603,7 +695,7 @@ details p{
     </div>
 
 
-    <!-- BUTTONS -->
+    <!-- BUTTON -->
 
     <div class="buttons">
 
@@ -718,9 +810,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     PETUNJUK
-========================= -->
+<!-- PETUNJUK -->
 
 <details>
 
@@ -739,17 +829,13 @@ details p{
         </li>
 
         <li>
-            Kedua lingkaran akan mempunyai
-            jumlah potongan yang sama.
+            Klik <b>Gabungkan</b> dan perhatikan
+            perpindahan bagian secara perlahan.
         </li>
 
         <li>
-            Klik <b>Gabungkan</b>.
-        </li>
-
-        <li>
-            Jika hasil lebih dari satu,
-            permainan akan membuat lingkaran tambahan.
+            Jika sebuah lingkaran sudah penuh,
+            lingkaran baru akan muncul otomatis.
         </li>
 
         <li>
@@ -757,7 +843,7 @@ details p{
         </li>
 
         <li>
-            Masukkan pembilang dan penyebut.
+            Masukkan hasil penjumlahan.
         </li>
 
     </ol>
@@ -768,27 +854,18 @@ details p{
 <details>
 
     <summary>
-        🧠 Contoh Penjumlahan
+        🧠 Contoh
     </summary>
 
-    <p style="text-align:center;font-size:21px;font-weight:bold;">
+    <p style="text-align:center;font-size:22px;font-weight:bold;">
 
-        2/3 + 2/3
-
-    </p>
-
-    <p style="text-align:center;font-size:21px;font-weight:bold;">
-
-        = 4/3
+        2/3 + 2/3 = 4/3
 
     </p>
 
     <p>
-
-        Karena satu lingkaran hanya mempunyai
-        <b>3/3</b>, maka hasil <b>4/3</b>
-        ditampilkan menjadi:
-
+        Karena satu lingkaran hanya dapat memuat
+        <b>3/3</b>, maka proses visualnya adalah:
     </p>
 
     <p style="text-align:center;font-size:22px;font-weight:bold;">
@@ -799,7 +876,7 @@ details p{
 
     <p style="text-align:center;font-size:22px;font-weight:bold;">
 
-        = 1 1/3
+        = 4/3
 
     </p>
 
@@ -815,20 +892,22 @@ details p{
    VARIABEL
 ================================================== */
 
-let n1 = 0;
-let d1 = 1;
+let n1=0;
+let d1=1;
 
-let n2 = 0;
-let d2 = 1;
+let n2=0;
+let d2=1;
 
-let commonDenominator = 1;
+let commonDenominator=1;
 
-let score = 0;
-let correctCount = 0;
-let questionNumber = 1;
+let score=0;
+let correctCount=0;
+let questionNumber=1;
 
-let currentStage = 1;
-let answered = false;
+let currentStage=1;
+let answered=false;
+
+let animationBusy=false;
 
 
 /* ==================================================
@@ -875,15 +954,15 @@ const denominatorInput =
 
 function gcd(a,b){
 
-    a = Math.abs(a);
-    b = Math.abs(b);
+    a=Math.abs(a);
+    b=Math.abs(b);
 
-    while(b !== 0){
+    while(b!==0){
 
-        let temp = a % b;
+        let temp=a%b;
 
-        a = b;
-        b = temp;
+        a=b;
+        b=temp;
 
     }
 
@@ -909,8 +988,7 @@ function lcm(a,b){
 
 function simplify(num,den){
 
-    const g =
-        gcd(num,den);
+    const g=gcd(num,den);
 
     return {
         numerator:num/g,
@@ -921,7 +999,7 @@ function simplify(num,den){
 
 
 /* ==================================================
-   FORMAT PECAHAN
+   FRACTION HTML
 ================================================== */
 
 function fractionHTML(num,den){
@@ -944,22 +1022,22 @@ function fractionHTML(num,den){
 
 
 /* ==================================================
-   RANDOM PECAHAN
+   RANDOM FRACTION
 ================================================== */
 
 function randomFraction(){
 
-    const denominator =
+    const denominator=
         Math.floor(
             Math.random()*4
         )+2;
 
-    const numerator =
+    const numerator=
         Math.floor(
             Math.random()*(denominator-1)
         )+1;
 
-    return {
+    return{
         numerator,
         denominator
     };
@@ -968,50 +1046,76 @@ function randomFraction(){
 
 
 /* ==================================================
-   MEMBUAT SOAL
+   BUAT SOAL
 ================================================== */
 
 function createQuestion(){
 
-    /*
-       Kita buat soal secara acak.
-       Tidak ada batasan hasil <= 1,
-       sehingga hasil seperti 4/3
-       dapat muncul.
-    */
+    const f1=randomFraction();
+    const f2=randomFraction();
 
-    const f1 =
-        randomFraction();
+    n1=f1.numerator;
+    d1=f1.denominator;
 
-    const f2 =
-        randomFraction();
+    n2=f2.numerator;
+    d2=f2.denominator;
 
-
-    n1 = f1.numerator;
-    d1 = f1.denominator;
-
-    n2 = f2.numerator;
-    d2 = f2.denominator;
-
-
-    commonDenominator =
+    commonDenominator=
         lcm(d1,d2);
 
 }
 
 
 /* ==================================================
-   RESET VISUAL TAHAP 1
+   RESET TAHAP
+================================================== */
+
+function resetStages(){
+
+    for(let i=1;i<=5;i++){
+
+        document
+            .getElementById("step"+i)
+            .classList.remove(
+                "active",
+                "done"
+            );
+
+    }
+
+    document
+        .getElementById("step1")
+        .classList.add("active");
+
+}
+
+
+/* ==================================================
+   RESET TOMBOL
+================================================== */
+
+function resetButtons(){
+
+    equalButton.disabled=false;
+
+    combineButton.disabled=true;
+
+    countButton.disabled=true;
+
+}
+
+
+/* ==================================================
+   VISUAL AWAL
 ================================================== */
 
 function restoreInitialVisual(){
 
-    visualArea.innerHTML = `
+    visualArea.innerHTML=`
 
         <div class="circle-box">
 
-            <div
-                class="circle-title">
+            <div class="circle-title">
                 Pecahan Pertama
             </div>
 
@@ -1036,8 +1140,7 @@ function restoreInitialVisual(){
 
         <div class="circle-box">
 
-            <div
-                class="circle-title">
+            <div class="circle-title">
                 Pecahan Kedua
             </div>
 
@@ -1074,53 +1177,13 @@ function restoreInitialVisual(){
 
 
     document.getElementById("info1")
-        .textContent =
+        .textContent=
         `${n1} dari ${d1} bagian`;
 
 
     document.getElementById("info2")
-        .textContent =
+        .textContent=
         `${n2} dari ${d2} bagian`;
-
-}
-
-
-/* ==================================================
-   RESET TAHAP
-================================================== */
-
-function resetStages(){
-
-    for(let i=1;i<=5;i++){
-
-        document
-            .getElementById("step"+i)
-            .classList.remove(
-                "active",
-                "done"
-            );
-
-    }
-
-
-    document
-        .getElementById("step1")
-        .classList.add("active");
-
-}
-
-
-/* ==================================================
-   RESET TOMBOL
-================================================== */
-
-function resetButtons(){
-
-    equalButton.disabled = false;
-
-    combineButton.disabled = true;
-
-    countButton.disabled = true;
 
 }
 
@@ -1131,13 +1194,11 @@ function resetButtons(){
 
 function newQuestion(){
 
-    /*
-       RESET TOTAL
-    */
+    currentStage=1;
 
-    currentStage = 1;
+    answered=false;
 
-    answered = false;
+    animationBusy=false;
 
 
     resetStages();
@@ -1145,33 +1206,21 @@ function newQuestion(){
     resetButtons();
 
 
-    /*
-       Bersihkan jawaban.
-    */
+    numeratorInput.value="";
 
-    numeratorInput.value = "";
+    denominatorInput.value="";
 
-    denominatorInput.value = "";
+    feedback.textContent="";
 
-    feedback.textContent = "";
-
-    feedback.className = "feedback";
+    feedback.className="feedback";
 
     answerArea.classList.add("hidden");
 
 
-    /*
-       Buat soal baru.
-    */
-
     createQuestion();
 
 
-    /*
-       Tampilkan ekspresi.
-    */
-
-    expression.innerHTML =
+    expression.innerHTML=
         fractionHTML(n1,d1)
         +
         " + "
@@ -1179,33 +1228,20 @@ function newQuestion(){
         fractionHTML(n2,d2);
 
 
-    /*
-       Instruksi tahap 1.
-    */
-
-    instruction.innerHTML = `
+    instruction.innerHTML=`
         👀 <b>Tahap 1:</b>
         Perhatikan kedua pecahan dan bagian
-        yang diarsir pada lingkaran.
+        yang diarsir.
     `;
 
 
-    /*
-       Proses awal.
-    */
-
-    processExpression.innerHTML =
+    processExpression.innerHTML=
         fractionHTML(n1,d1)
         +
         " + "
         +
         fractionHTML(n2,d2);
 
-
-    /*
-       WAJIB:
-       bangun kembali dua lingkaran.
-    */
 
     restoreInitialVisual();
 
@@ -1223,7 +1259,7 @@ function drawCircle(
     color
 ){
 
-    const canvas =
+    const canvas=
         document.getElementById(canvasId);
 
     if(!canvas){
@@ -1231,13 +1267,13 @@ function drawCircle(
     }
 
 
-    const ctx =
+    const ctx=
         canvas.getContext("2d");
 
 
-    const cx = 250;
-    const cy = 250;
-    const radius = 215;
+    const cx=250;
+    const cy=250;
+    const radius=215;
 
 
     ctx.clearRect(
@@ -1248,8 +1284,15 @@ function drawCircle(
     );
 
 
+    const slice=
+        Math.PI*2/denominator;
+
+    const start=
+        -Math.PI/2;
+
+
     /*
-       Lingkaran putih
+       Background
     */
 
     ctx.beginPath();
@@ -1262,24 +1305,13 @@ function drawCircle(
         Math.PI*2
     );
 
-    ctx.fillStyle = "#ffffff";
+    ctx.fillStyle="#ffffff";
 
     ctx.fill();
 
 
     /*
-       Besar setiap potongan
-    */
-
-    const slice =
-        Math.PI*2/denominator;
-
-    const start =
-        -Math.PI/2;
-
-
-    /*
-       Bagian diarsir
+       Arsiran
     */
 
     for(
@@ -1290,10 +1322,7 @@ function drawCircle(
 
         ctx.beginPath();
 
-        ctx.moveTo(
-            cx,
-            cy
-        );
+        ctx.moveTo(cx,cy);
 
         ctx.arc(
             cx,
@@ -1305,29 +1334,24 @@ function drawCircle(
 
         ctx.closePath();
 
-        ctx.fillStyle =
-            color;
+        ctx.fillStyle=color;
 
-        ctx.globalAlpha =
-            .75;
+        ctx.globalAlpha=.78;
 
         ctx.fill();
 
-        ctx.globalAlpha =
-            1;
+        ctx.globalAlpha=1;
 
     }
 
 
     /*
-       Garis potongan
+       Garis
     */
 
-    ctx.strokeStyle =
-        "#334155";
+    ctx.strokeStyle="#334155";
 
-    ctx.lineWidth =
-        4;
+    ctx.lineWidth=4;
 
 
     for(
@@ -1336,20 +1360,913 @@ function drawCircle(
         i++
     ){
 
-        const angle =
+        const angle=
+            start+i*slice;
+
+        const x=
+            cx+
+            radius*Math.cos(angle);
+
+        const y=
+            cy+
+            radius*Math.sin(angle);
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(cx,cy);
+
+        ctx.lineTo(x,y);
+
+        ctx.stroke();
+
+    }
+
+
+    /*
+       Lingkaran luar
+    */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        cx,
+        cy,
+        radius,
+        0,
+        Math.PI*2
+    );
+
+    ctx.stroke();
+
+}
+
+
+/* ==================================================
+   TAHAP 2
+================================================== */
+
+function equalizeDenominator(){
+
+    if(currentStage!==1){
+        return;
+    }
+
+
+    currentStage=2;
+
+
+    const newN1=
+        n1*
+        (commonDenominator/d1);
+
+
+    const newN2=
+        n2*
+        (commonDenominator/d2);
+
+
+    const canvas1=
+        document.getElementById("circle1");
+
+    const canvas2=
+        document.getElementById("circle2");
+
+
+    canvas1.classList.add(
+        "partition-animation"
+    );
+
+    canvas2.classList.add(
+        "partition-animation"
+    );
+
+
+    setTimeout(()=>{
+
+        drawCircle(
+            "circle1",
+            newN1,
+            commonDenominator,
+            "#3b82f6"
+        );
+
+        drawCircle(
+            "circle2",
+            newN2,
+            commonDenominator,
+            "#f97316"
+        );
+
+    },350);
+
+
+    document.getElementById("info1")
+        .textContent=
+        `${newN1} dari ${commonDenominator} bagian`;
+
+
+    document.getElementById("info2")
+        .textContent=
+        `${newN2} dari ${commonDenominator} bagian`;
+
+
+    instruction.innerHTML=`
+        🔄 <b>Tahap 2:</b>
+        Kedua lingkaran sekarang mempunyai
+        jumlah potongan yang sama.
+    `;
+
+
+    processExpression.innerHTML=
+        fractionHTML(
+            newN1,
+            commonDenominator
+        )
+        +
+        " + "
+        +
+        fractionHTML(
+            newN2,
+            commonDenominator
+        );
+
+
+    equalButton.disabled=true;
+
+    combineButton.disabled=false;
+
+
+    document
+        .getElementById("step1")
+        .classList.remove("active");
+
+    document
+        .getElementById("step1")
+        .classList.add("done");
+
+    document
+        .getElementById("step2")
+        .classList.add("active");
+
+}
+
+
+/* ==================================================
+   TAHAP 3
+   ANIMASI PENGGABUNGAN
+================================================== */
+
+function combineFractions(){
+
+    if(
+        currentStage!==2
+        ||
+        animationBusy
+    ){
+        return;
+    }
+
+
+    animationBusy=true;
+
+    currentStage=3;
+
+
+    const newN1=
+        n1*
+        (commonDenominator/d1);
+
+
+    const newN2=
+        n2*
+        (commonDenominator/d2);
+
+
+    const total=
+        newN1+newN2;
+
+
+    /*
+       Simpan visual awal
+       selama animasi.
+    */
+
+    const oldVisual=
+        visualArea.innerHTML;
+
+
+    /*
+       Buat area animasi.
+    */
+
+    visualArea.innerHTML=`
+
+        <div class="animation-stage">
+
+            <div
+                class="source-area"
+                id="sourceArea">
+
+                <div class="circle-title">
+                    Pecahan Kedua
+                </div>
+
+                <canvas
+                    id="sourceCircle"
+                    width="500"
+                    height="500">
+                </canvas>
+
+                <div class="circle-info">
+                    ${newN2}/${commonDenominator}
+                </div>
+
+            </div>
+
+
+            <div
+                class="target-area"
+                id="targetArea">
+
+                <div class="circle-title">
+                    Pecahan Pertama
+                </div>
+
+                <canvas
+                    id="targetCircle"
+                    width="500"
+                    height="500">
+                </canvas>
+
+                <div
+                    class="circle-info"
+                    id="targetInfo">
+                    ${newN1}/${commonDenominator}
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    drawCircle(
+        "sourceCircle",
+        newN2,
+        commonDenominator,
+        "#f97316"
+    );
+
+
+    drawCircle(
+        "targetCircle",
+        newN1,
+        commonDenominator,
+        "#3b82f6"
+    );
+
+
+    instruction.innerHTML=`
+        🧩 <b>Tahap 3:</b>
+        Perhatikan bagian dari pecahan kedua
+        bergerak menuju lingkaran pertama.
+    `;
+
+
+    processExpression.innerHTML=
+        fractionHTML(
+            newN1,
+            commonDenominator
+        )
+        +
+        " + "
+        +
+        fractionHTML(
+            newN2,
+            commonDenominator
+        )
+        +
+        " = ?";
+
+
+    combineButton.disabled=true;
+
+
+    /*
+       Jalankan animasi satu per satu.
+    */
+
+    animateTransfer(
+        newN1,
+        newN2,
+        commonDenominator,
+        total
+    );
+
+}
+
+
+/* ==================================================
+   ANIMASI PERPINDAHAN
+================================================== */
+
+function animateTransfer(
+    first,
+    second,
+    denominator,
+    total
+){
+
+    const animationStage=
+        document.querySelector(
+            ".animation-stage"
+        );
+
+
+    const source=
+        document.getElementById(
+            "sourceCircle"
+        );
+
+
+    const target=
+        document.getElementById(
+            "targetCircle"
+        );
+
+
+    /*
+       Tentukan berapa bagian
+       yang masih bisa masuk ke
+       lingkaran pertama.
+    */
+
+    const space=
+        denominator-first;
+
+
+    /*
+       Bagian pertama yang dipindahkan
+       sebanyak ruang kosong.
+    */
+
+    const toFirst=
+        Math.min(
+            second,
+            space
+        );
+
+
+    /*
+       Sisa yang membutuhkan
+       lingkaran baru.
+    */
+
+    const remaining=
+        second-toFirst;
+
+
+    let delay=0;
+
+
+    /*
+       Gerakkan potongan satu per satu.
+    */
+
+    for(
+        let i=0;
+        i<second;
+        i++
+    ){
+
+        setTimeout(()=>{
+
+            const piece=
+                document.createElement(
+                    "div"
+                );
+
+
+            piece.className=
+                "moving-piece";
+
+
+            piece.style.background=
+                "#f97316";
+
+
+            /*
+               Posisi awal:
+               dekat sumber.
+            */
+
+            const sourceRect=
+                source.getBoundingClientRect();
+
+
+            const stageRect=
+                animationStage
+                    .getBoundingClientRect();
+
+
+            const startX=
+                sourceRect.left-
+                stageRect.left+
+                sourceRect.width/2-
+                27;
+
+
+            const startY=
+                sourceRect.top-
+                stageRect.top+
+                sourceRect.height/2-
+                27;
+
+
+            piece.style.left=
+                startX+"px";
+
+
+            piece.style.top=
+                startY+"px";
+
+
+            /*
+               Jika masih ada ruang,
+               masuk ke lingkaran pertama.
+            */
+
+            if(i<toFirst){
+
+                const targetRect=
+                    target
+                        .getBoundingClientRect();
+
+
+                const endX=
+                    targetRect.left-
+                    stageRect.left+
+                    targetRect.width/2-
+                    27;
+
+
+                const endY=
+                    targetRect.top-
+                    stageRect.top+
+                    targetRect.height/2-
+                    27;
+
+
+                piece.style.setProperty(
+                    "--startX",
+                    "0px"
+                );
+
+                piece.style.setProperty(
+                    "--startY",
+                    "0px"
+                );
+
+                piece.style.setProperty(
+                    "--endX",
+                    (endX-startX)+"px"
+                );
+
+                piece.style.setProperty(
+                    "--endY",
+                    (endY-startY)+"px"
+                );
+
+            }
+
+            else{
+
+                /*
+                   Jika lingkaran pertama
+                   sudah penuh, arahkan
+                   potongan ke area lingkaran
+                   baru.
+                */
+
+                const targetRect=
+                    target
+                        .getBoundingClientRect();
+
+
+                /*
+                   Posisi lingkaran baru
+                   berada di sebelah kanan
+                   target.
+                */
+
+                const newX=
+                    targetRect.left-
+                    stageRect.left+
+                    targetRect.width+
+                    25;
+
+
+                const newY=
+                    targetRect.top-
+                    stageRect.top+
+                    targetRect.height/2-
+                    27;
+
+
+                piece.style.setProperty(
+                    "--startX",
+                    "0px"
+                );
+
+                piece.style.setProperty(
+                    "--startY",
+                    "0px"
+                );
+
+                piece.style.setProperty(
+                    "--endX",
+                    (newX-startX)+"px"
+                );
+
+                piece.style.setProperty(
+                    "--endY",
+                    (newY-startY)+"px"
+                );
+
+            }
+
+
+            animationStage
+                .appendChild(piece);
+
+
+            /*
+               Trigger animation.
+            */
+
+            requestAnimationFrame(()=>{
+
+                piece.classList.add(
+                    "move-piece"
+                );
+
+            });
+
+
+            /*
+               Hapus objek animasi.
+            */
+
+            setTimeout(()=>{
+
+                piece.remove();
+
+            },1200);
+
+
+        },delay);
+
+
+        delay+=650;
+
+    }
+
+
+    /*
+       Setelah semua potongan bergerak,
+       tampilkan hasil akhir.
+    */
+
+    setTimeout(()=>{
+
+        showCombinedResult(
+            first,
+            second,
+            denominator
+        );
+
+    },delay+400);
+
+}
+
+
+/* ==================================================
+   HASIL GABUNGAN
+================================================== */
+
+function showCombinedResult(
+    first,
+    second,
+    denominator
+){
+
+    const total=
+        first+second;
+
+
+    const fullCircles=
+        Math.floor(
+            total/denominator
+        );
+
+
+    const remainder=
+        total%denominator;
+
+
+    visualArea.innerHTML=`
+
+        <div
+            class="combination-area"
+            id="combinationArea">
+        </div>
+
+    `;
+
+
+    const area=
+        document.getElementById(
+            "combinationArea"
+        );
+
+
+    /*
+       Lingkaran penuh
+    */
+
+    for(
+        let i=0;
+        i<fullCircles;
+        i++
+    ){
+
+        const box=
+            document.createElement(
+                "div"
+            );
+
+
+        box.className=
+            "result-circle";
+
+
+        box.innerHTML=`
+
+            <div class="result-label">
+                Lingkaran ${i+1}
+            </div>
+
+            <canvas
+                id="full${i}"
+                width="500"
+                height="500">
+            </canvas>
+
+            <div class="result-info">
+                ${denominator}/${denominator}
+            </div>
+
+        `;
+
+
+        area.appendChild(box);
+
+
+        drawFullCircle(
+            `full${i}`,
+            denominator
+        );
+
+    }
+
+
+    /*
+       Lingkaran sisa
+    */
+
+    if(remainder>0){
+
+        const box=
+            document.createElement(
+                "div"
+            );
+
+
+        box.className=
+            "result-circle";
+
+
+        box.innerHTML=`
+
+            <div class="result-label">
+                Lingkaran ${fullCircles+1}
+            </div>
+
+            <canvas
+                id="remainder"
+                width="500"
+                height="500">
+            </canvas>
+
+            <div class="result-info">
+                ${remainder}/${denominator}
+            </div>
+
+        `;
+
+
+        area.appendChild(box);
+
+
+        drawRemainderCircle(
+            "remainder",
+            remainder,
+            denominator
+        );
+
+    }
+
+
+    /*
+       Jika tepat satu atau beberapa lingkaran penuh
+    */
+
+    if(
+        remainder===0
+        &&
+        fullCircles===0
+    ){
+
+        const box=
+            document.createElement(
+                "div"
+            );
+
+        box.className=
+            "result-circle";
+
+        box.innerHTML=`
+
+            <div class="result-label">
+                Hasil
+            </div>
+
+            <canvas
+                id="emptyResult"
+                width="500"
+                height="500">
+            </canvas>
+
+        `;
+
+        area.appendChild(box);
+
+    }
+
+
+    instruction.innerHTML=`
+        🎉 <b>Lingkaran berhasil digabungkan!</b>
+        Perhatikan bahwa ketika lingkaran pertama
+        penuh, bagian berikutnya membentuk
+        lingkaran baru.
+    `;
+
+
+    processExpression.innerHTML=
+        fractionHTML(
+            first,
+            denominator
+        )
+        +
+        " + "
+        +
+        fractionHTML(
+            second,
+            denominator
+        )
+        +
+        " = ?";
+
+
+    animationBusy=false;
+
+    countButton.disabled=false;
+
+
+    document
+        .getElementById("step2")
+        .classList.remove("active");
+
+    document
+        .getElementById("step2")
+        .classList.add("done");
+
+    document
+        .getElementById("step3")
+        .classList.remove("active");
+
+    document
+        .getElementById("step3")
+        .classList.add("done");
+
+}
+
+
+/* ==================================================
+   LINGKARAN PENUH
+================================================== */
+
+function drawFullCircle(
+    canvasId,
+    denominator
+){
+
+    const canvas=
+        document.getElementById(
+            canvasId
+        );
+
+    if(!canvas){
+        return;
+    }
+
+
+    const ctx=
+        canvas.getContext("2d");
+
+
+    const cx=250;
+    const cy=250;
+    const radius=215;
+
+
+    ctx.clearRect(
+        0,
+        0,
+        500,
+        500
+    );
+
+
+    /*
+       Isi penuh
+    */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        cx,
+        cy,
+        radius,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fillStyle="#3b82f6";
+
+    ctx.globalAlpha=.75;
+
+    ctx.fill();
+
+    ctx.globalAlpha=1;
+
+
+    /*
+       Garis potongan
+    */
+
+    const slice=
+        Math.PI*2/denominator;
+
+    const start=
+        -Math.PI/2;
+
+
+    ctx.strokeStyle="#334155";
+
+    ctx.lineWidth=4;
+
+
+    for(
+        let i=0;
+        i<denominator;
+        i++
+    ){
+
+        const angle=
             start+i*slice;
 
 
-        const x =
+        const x=
             cx+
-            radius*
-            Math.cos(angle);
+            radius*Math.cos(angle);
 
 
-        const y =
+        const y=
             cy+
-            radius*
-            Math.sin(angle);
+            radius*Math.sin(angle);
 
 
         ctx.beginPath();
@@ -1389,470 +2306,7 @@ function drawCircle(
 
 
 /* ==================================================
-   TAHAP 2
-   SAMAKAN PENYEBUT
-================================================== */
-
-function equalizeDenominator(){
-
-    if(currentStage !== 1){
-        return;
-    }
-
-
-    currentStage = 2;
-
-
-    const newN1 =
-        n1*
-        (commonDenominator/d1);
-
-
-    const newN2 =
-        n2*
-        (commonDenominator/d2);
-
-
-    drawCircle(
-        "circle1",
-        newN1,
-        commonDenominator,
-        "#3b82f6"
-    );
-
-
-    drawCircle(
-        "circle2",
-        newN2,
-        commonDenominator,
-        "#f97316"
-    );
-
-
-    document.getElementById("info1")
-        .innerHTML =
-        `${newN1} dari ${commonDenominator} bagian`;
-
-
-    document.getElementById("info2")
-        .innerHTML =
-        `${newN2} dari ${commonDenominator} bagian`;
-
-
-    instruction.innerHTML = `
-        🔄 <b>Tahap 2:</b>
-        Kedua pecahan sekarang mempunyai
-        jumlah potongan yang sama.
-    `;
-
-
-    processExpression.innerHTML =
-        fractionHTML(
-            newN1,
-            commonDenominator
-        )
-        +
-        " + "
-        +
-        fractionHTML(
-            newN2,
-            commonDenominator
-        );
-
-
-    equalButton.disabled = true;
-
-    combineButton.disabled = false;
-
-
-    document
-        .getElementById("step1")
-        .classList.remove("active");
-
-    document
-        .getElementById("step1")
-        .classList.add("done");
-
-    document
-        .getElementById("step2")
-        .classList.add("active");
-
-}
-
-
-/* ==================================================
-   TAHAP 3
-   GABUNGKAN
-================================================== */
-
-function combineFractions(){
-
-    if(currentStage !== 2){
-        return;
-    }
-
-
-    currentStage = 3;
-
-
-    const newN1 =
-        n1*
-        (commonDenominator/d1);
-
-
-    const newN2 =
-        n2*
-        (commonDenominator/d2);
-
-
-    const total =
-        newN1+newN2;
-
-
-    /*
-       Hitung jumlah lingkaran penuh
-       dan sisa bagian.
-    */
-
-    const fullCircles =
-        Math.floor(
-            total/commonDenominator
-        );
-
-
-    const remainder =
-        total%commonDenominator;
-
-
-    /*
-       Jika hasil:
-       4/3
-
-       fullCircles = 1
-       remainder = 1
-
-       Maka:
-       lingkaran 1 = 3/3
-       lingkaran 2 = 1/3
-    */
-
-
-    visualArea.innerHTML = `
-
-        <div class="combined-area"
-             id="combinedArea">
-        </div>
-
-    `;
-
-
-    const combinedArea =
-        document.getElementById(
-            "combinedArea"
-        );
-
-
-    /*
-       Buat lingkaran penuh.
-    */
-
-    for(
-        let i=0;
-        i<fullCircles;
-        i++
-    ){
-
-        const box =
-            document.createElement("div");
-
-        box.className =
-            "result-circle";
-
-
-        box.innerHTML = `
-
-            <div class="result-label">
-                Lingkaran ${i+1}
-            </div>
-
-            <canvas
-                id="fullCircle${i}"
-                width="500"
-                height="500">
-            </canvas>
-
-            <div class="result-info">
-                ${commonDenominator}/${commonDenominator}
-            </div>
-
-        `;
-
-
-        combinedArea.appendChild(box);
-
-
-        drawFullCircle(
-            `fullCircle${i}`,
-            commonDenominator
-        );
-
-    }
-
-
-    /*
-       Buat lingkaran sisa.
-    */
-
-    if(remainder > 0){
-
-        const index =
-            fullCircles+1;
-
-
-        const box =
-            document.createElement("div");
-
-        box.className =
-            "result-circle";
-
-
-        box.innerHTML = `
-
-            <div class="result-label">
-                Lingkaran ${index}
-            </div>
-
-            <canvas
-                id="remainderCircle"
-                width="500"
-                height="500">
-            </canvas>
-
-            <div class="result-info">
-                ${remainder}/${commonDenominator}
-            </div>
-
-        `;
-
-
-        combinedArea.appendChild(box);
-
-
-        /*
-           Warnai sisa.
-           Warna bergantian menunjukkan
-           bahwa bagian berasal dari
-           penjumlahan dua pecahan.
-        */
-
-        drawRemainderCircle(
-            "remainderCircle",
-            remainder,
-            commonDenominator
-        );
-
-    }
-
-
-    /*
-       Jika hasil tepat bilangan bulat,
-       tetap tampilkan lingkaran penuh.
-    */
-
-    if(total === 0){
-
-        drawRemainderCircle(
-            "remainderCircle",
-            0,
-            commonDenominator
-        );
-
-    }
-
-
-    instruction.innerHTML = `
-        🧩 <b>Tahap 3:</b>
-        Bagian-bagian pecahan sekarang digabungkan.
-        Jika hasil lebih dari satu lingkaran,
-        dibuat lingkaran tambahan.
-    `;
-
-
-    /*
-       Jangan tampilkan hasil akhir.
-    */
-
-    processExpression.innerHTML =
-        fractionHTML(
-            newN1,
-            commonDenominator
-        )
-        +
-        " + "
-        +
-        fractionHTML(
-            newN2,
-            commonDenominator
-        )
-        +
-        " = ?";
-
-
-    combineButton.disabled = true;
-
-    countButton.disabled = false;
-
-
-    document
-        .getElementById("step2")
-        .classList.remove("active");
-
-    document
-        .getElementById("step2")
-        .classList.add("done");
-
-    document
-        .getElementById("step3")
-        .classList.add("active");
-
-}
-
-
-/* ==================================================
-   GAMBAR LINGKARAN PENUH
-================================================== */
-
-function drawFullCircle(
-    canvasId,
-    denominator
-){
-
-    const canvas =
-        document.getElementById(canvasId);
-
-    if(!canvas){
-        return;
-    }
-
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    const cx=250;
-    const cy=250;
-    const radius=215;
-
-
-    ctx.clearRect(
-        0,
-        0,
-        500,
-        500
-    );
-
-
-    /*
-       Isi penuh
-    */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        cx,
-        cy,
-        radius,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fillStyle =
-        "#3b82f6";
-
-    ctx.globalAlpha=.75;
-
-    ctx.fill();
-
-    ctx.globalAlpha=1;
-
-
-    /*
-       Garis potongan
-    */
-
-    const slice =
-        Math.PI*2/denominator;
-
-    const start =
-        -Math.PI/2;
-
-
-    ctx.strokeStyle =
-        "#334155";
-
-    ctx.lineWidth=4;
-
-
-    for(
-        let i=0;
-        i<denominator;
-        i++
-    ){
-
-        const angle =
-            start+i*slice;
-
-
-        const x =
-            cx+
-            radius*
-            Math.cos(angle);
-
-
-        const y =
-            cy+
-            radius*
-            Math.sin(angle);
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            cx,
-            cy
-        );
-
-        ctx.lineTo(
-            x,
-            y
-        );
-
-        ctx.stroke();
-
-    }
-
-
-    /*
-       Garis luar
-    */
-
-    ctx.beginPath();
-
-    ctx.arc(
-        cx,
-        cy,
-        radius,
-        0,
-        Math.PI*2
-    );
-
-    ctx.stroke();
-
-}
-
-
-/* ==================================================
-   GAMBAR LINGKARAN SISA
+   LINGKARAN SISA
 ================================================== */
 
 function drawRemainderCircle(
@@ -1861,15 +2315,17 @@ function drawRemainderCircle(
     denominator
 ){
 
-    const canvas =
-        document.getElementById(canvasId);
+    const canvas=
+        document.getElementById(
+            canvasId
+        );
 
     if(!canvas){
         return;
     }
 
 
-    const ctx =
+    const ctx=
         canvas.getContext("2d");
 
 
@@ -1886,15 +2342,15 @@ function drawRemainderCircle(
     );
 
 
-    const slice =
+    const slice=
         Math.PI*2/denominator;
 
-    const start =
+    const start=
         -Math.PI/2;
 
 
     /*
-       Arsiran sisa
+       Arsiran
     */
 
     for(
@@ -1920,8 +2376,7 @@ function drawRemainderCircle(
 
         ctx.closePath();
 
-        ctx.fillStyle =
-            "#f97316";
+        ctx.fillStyle="#f97316";
 
         ctx.globalAlpha=.8;
 
@@ -1933,11 +2388,10 @@ function drawRemainderCircle(
 
 
     /*
-       Garis potongan
+       Garis
     */
 
-    ctx.strokeStyle =
-        "#334155";
+    ctx.strokeStyle="#334155";
 
     ctx.lineWidth=4;
 
@@ -1948,20 +2402,18 @@ function drawRemainderCircle(
         i++
     ){
 
-        const angle =
+        const angle=
             start+i*slice;
 
 
-        const x =
+        const x=
             cx+
-            radius*
-            Math.cos(angle);
+            radius*Math.cos(angle);
 
 
-        const y =
+        const y=
             cy+
-            radius*
-            Math.sin(angle);
+            radius*Math.sin(angle);
 
 
         ctx.beginPath();
@@ -2002,46 +2454,45 @@ function drawRemainderCircle(
 
 /* ==================================================
    TAHAP 4
-   HITUNG
 ================================================== */
 
 function showCounting(){
 
-    if(currentStage !== 3){
+    if(
+        currentStage!==3
+        ||
+        animationBusy
+    ){
         return;
     }
 
 
-    currentStage = 4;
+    currentStage=4;
 
 
-    const newN1 =
+    const newN1=
         n1*
         (commonDenominator/d1);
 
 
-    const newN2 =
+    const newN2=
         n2*
         (commonDenominator/d2);
 
 
-    const total =
-        newN1+newN2;
-
-
-    instruction.innerHTML = `
+    instruction.innerHTML=`
         🔢 <b>Tahap 4:</b>
-        Hitung semua bagian yang diarsir
-        dari seluruh lingkaran.
-        Kemudian tentukan hasil penjumlahannya.
+        Hitung seluruh bagian yang diarsir
+        dari semua lingkaran.
+        Tentukan hasil penjumlahannya.
     `;
 
 
     /*
-       JANGAN tampilkan hasil.
+       Jangan tampilkan hasil.
     */
 
-    processExpression.innerHTML =
+    processExpression.innerHTML=
         fractionHTML(
             newN1,
             commonDenominator
@@ -2057,25 +2508,13 @@ function showCounting(){
         " = ?";
 
 
-    countButton.disabled = true;
+    countButton.disabled=true;
 
 
     answerArea.classList.remove(
         "hidden"
     );
 
-
-    document
-        .getElementById("step3")
-        .classList.remove("active");
-
-    document
-        .getElementById("step3")
-        .classList.add("done");
-
-    document
-        .getElementById("step4")
-        .classList.remove("active");
 
     document
         .getElementById("step4")
@@ -2099,13 +2538,13 @@ function checkAnswer(){
     }
 
 
-    const userNum =
+    const userNum=
         parseInt(
             numeratorInput.value
         );
 
 
-    const userDen =
+    const userDen=
         parseInt(
             denominatorInput.value
         );
@@ -2119,10 +2558,10 @@ function checkAnswer(){
         userDen===0
     ){
 
-        feedback.innerHTML =
+        feedback.innerHTML=
             "⚠️ Masukkan pembilang dan penyebut.";
 
-        feedback.className =
+        feedback.className=
             "feedback wrong";
 
         return;
@@ -2131,18 +2570,18 @@ function checkAnswer(){
 
 
     /*
-       Hasil sebenarnya.
+       Hasil asli
     */
 
-    const resultNum =
+    const resultNum=
         n1*d2+n2*d1;
 
 
-    const resultDen =
+    const resultDen=
         d1*d2;
 
 
-    const result =
+    const result=
         simplify(
             resultNum,
             resultDen
@@ -2150,50 +2589,47 @@ function checkAnswer(){
 
 
     /*
-       Jawaban siswa.
+       Jawaban siswa
     */
 
-    const user =
+    const user=
         simplify(
             userNum,
             userDen
         );
 
 
-    /*
-       BENAR
-    */
-
     if(
-        user.numerator === result.numerator
+        user.numerator===
+        result.numerator
         &&
-        user.denominator === result.denominator
+        user.denominator===
+        result.denominator
     ){
 
-        score += 10;
+        score+=10;
 
         correctCount++;
 
         answered=true;
 
 
-        feedback.innerHTML =
-            `
+        feedback.innerHTML=`
             🎉 <b>Benar!</b>
             <br>
+            Hasilnya adalah
             ${fractionHTML(
                 result.numerator,
                 result.denominator
             )}
-            adalah hasil yang tepat.
-            `;
+        `;
 
 
-        feedback.className =
+        feedback.className=
             "feedback correct";
 
 
-        processExpression.innerHTML =
+        processExpression.innerHTML=
             fractionHTML(n1,d1)
             +
             " + "
@@ -2219,28 +2655,27 @@ function checkAnswer(){
 
         document
             .getElementById("score")
-            .textContent =
+            .textContent=
             score;
 
 
         document
             .getElementById("correctCount")
-            .textContent =
+            .textContent=
             correctCount;
 
     }
 
     else{
 
-        feedback.innerHTML =
-            `
+        feedback.innerHTML=`
             ❌ <b>Belum tepat.</b>
             <br>
-            Coba perhatikan kembali
-            jumlah bagian yang diarsir.
-            `;
+            Coba hitung kembali semua bagian.
+        `;
 
-        feedback.className =
+
+        feedback.className=
             "feedback wrong";
 
     }
@@ -2259,14 +2694,12 @@ function nextQuestion(){
 
     document
         .getElementById("questionNumber")
-        .textContent =
+        .textContent=
         questionNumber;
 
 
     /*
-       RESET TOTAL.
-       Soal baru selalu dimulai
-       dari Tahap 1.
+       RESET TOTAL
     */
 
     newQuestion();
@@ -2308,7 +2741,7 @@ function resetGame(){
 
 
 /* ==================================================
-   MULAI GAME
+   MULAI
 ================================================== */
 
 newQuestion();

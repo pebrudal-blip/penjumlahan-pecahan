@@ -1,7 +1,7 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,8 +15,8 @@
 
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
     min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
     background:linear-gradient(135deg,#dbeafe,#eff6ff,#f8fafc);
     color:#1e293b;
 }
@@ -26,9 +26,7 @@ body{
     margin:20px auto;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
     background:white;
@@ -59,14 +57,12 @@ body{
 
 .score-box{
     background:#eff6ff;
-    border-radius:12px;
     padding:9px 18px;
+    border-radius:12px;
     font-weight:bold;
 }
 
-/* =========================
-   SOAL
-========================= */
+/* SOAL */
 
 .question{
     background:white;
@@ -106,9 +102,7 @@ body{
     padding:3px 6px 0;
 }
 
-/* =========================
-   PROGRESS
-========================= */
+/* PROGRESS */
 
 .progress{
     background:white;
@@ -139,7 +133,6 @@ body{
     font-size:13px;
     background:#e2e8f0;
     color:#64748b;
-    transition:.3s;
 }
 
 .step.active{
@@ -152,9 +145,7 @@ body{
     color:white;
 }
 
-/* =========================
-   GAME
-========================= */
+/* GAME */
 
 .game-area{
     background:white;
@@ -172,9 +163,7 @@ body{
     min-height:55px;
 }
 
-/* =========================
-   CIRCLES
-========================= */
+/* VISUAL */
 
 .visual-area{
     display:flex;
@@ -212,19 +201,13 @@ canvas{
     min-height:25px;
 }
 
-/* =========================
-   ARROW
-========================= */
-
 .arrow{
     font-size:45px;
     color:#2563eb;
     font-weight:bold;
 }
 
-/* =========================
-   PROCESS
-========================= */
+/* PROCESS */
 
 .process-box{
     background:#f8fafc;
@@ -246,9 +229,7 @@ canvas{
     min-height:45px;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 
 .buttons{
     text-align:center;
@@ -268,6 +249,13 @@ button{
 
 button:hover{
     transform:translateY(-2px);
+}
+
+button:disabled{
+    background:#cbd5e1 !important;
+    color:#64748b !important;
+    cursor:not-allowed;
+    transform:none;
 }
 
 .primary{
@@ -290,16 +278,7 @@ button:hover{
     color:white;
 }
 
-button:disabled{
-    background:#cbd5e1;
-    color:#64748b;
-    cursor:not-allowed;
-    transform:none;
-}
-
-/* =========================
-   ANSWER
-========================= */
+/* ANSWER */
 
 .answer-area{
     margin-top:20px;
@@ -359,9 +338,7 @@ button:disabled{
     color:#dc2626;
 }
 
-/* =========================
-   PETUNJUK
-========================= */
+/* PETUNJUK */
 
 details{
     background:white;
@@ -382,31 +359,7 @@ details p{
     line-height:1.6;
 }
 
-/* =========================
-   ANIMASI
-========================= */
-
-.fade{
-    animation:fade .5s ease;
-}
-
-@keyframes fade{
-
-    from{
-        opacity:0;
-        transform:scale(.95);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:650px){
 
@@ -440,6 +393,7 @@ details p{
 }
 
 </style>
+
 </head>
 
 
@@ -447,9 +401,7 @@ details p{
 
 <div class="container">
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <div class="header">
 
@@ -462,15 +414,18 @@ details p{
     <div class="score">
 
         <div class="score-box">
-            ⭐ Skor: <span id="score">0</span>
+            ⭐ Skor:
+            <span id="score">0</span>
         </div>
 
         <div class="score-box">
-            🎯 Soal: <span id="questionNumber">1</span>
+            🎯 Soal:
+            <span id="questionNumber">1</span>
         </div>
 
         <div class="score-box">
-            ✅ Benar: <span id="correctCount">0</span>
+            ✅ Benar:
+            <span id="correctCount">0</span>
         </div>
 
     </div>
@@ -478,9 +433,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     SOAL
-========================= -->
+<!-- SOAL -->
 
 <div class="question">
 
@@ -496,9 +449,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     PROGRESS
-========================= -->
+<!-- PROGRESS -->
 
 <div class="progress">
 
@@ -508,33 +459,23 @@ details p{
 
     <div class="steps">
 
-        <div
-            class="step active"
-            id="step1">
+        <div class="step active" id="step1">
             1. Pecahan
         </div>
 
-        <div
-            class="step"
-            id="step2">
+        <div class="step" id="step2">
             2. Samakan
         </div>
 
-        <div
-            class="step"
-            id="step3">
+        <div class="step" id="step3">
             3. Gabungkan
         </div>
 
-        <div
-            class="step"
-            id="step4">
+        <div class="step" id="step4">
             4. Hitung
         </div>
 
-        <div
-            class="step"
-            id="step5">
+        <div class="step" id="step5">
             5. Jawab
         </div>
 
@@ -543,9 +484,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     GAME AREA
-========================= -->
+<!-- GAME -->
 
 <div class="game-area">
 
@@ -555,11 +494,14 @@ details p{
     </div>
 
 
+    <!--
+        BAGIAN INI SELALU DIKEMBALIKAN
+        KE KONDISI AWAL PADA SOAL BARU
+    -->
+
     <div
         class="visual-area"
         id="visualArea">
-
-        <!-- LINGKARAN 1 -->
 
         <div class="circle-box">
 
@@ -583,14 +525,10 @@ details p{
         </div>
 
 
-        <div
-            class="arrow"
-            id="arrow">
+        <div class="arrow">
             +
         </div>
 
-
-        <!-- LINGKARAN 2 -->
 
         <div class="circle-box">
 
@@ -616,9 +554,7 @@ details p{
     </div>
 
 
-    <!-- =========================
-         PROSES MATEMATIKA
-    ========================= -->
+    <!-- PROSES -->
 
     <div class="process-box">
 
@@ -634,9 +570,7 @@ details p{
     </div>
 
 
-    <!-- =========================
-         BUTTON
-    ========================= -->
+    <!-- BUTTON -->
 
     <div class="buttons">
 
@@ -644,39 +578,48 @@ details p{
             class="primary"
             id="equalButton"
             onclick="equalizeDenominator()">
+
             🔄 Samakan Potongan
+
         </button>
+
 
         <button
             class="success"
             id="combineButton"
             onclick="combineFractions()"
             disabled>
+
             🧩 Gabungkan
+
         </button>
+
 
         <button
             class="warning"
             id="countButton"
             onclick="showCounting()"
             disabled>
+
             🔢 Hitung Bagian
+
         </button>
 
     </div>
 
 
-    <!-- =========================
-         JAWABAN
-    ========================= -->
+    <!-- JAWABAN -->
 
     <div
         class="answer-area hidden"
         id="answerArea">
 
         <div class="answer-title">
+
             ✏️ Sekarang tentukan hasil penjumlahannya!
+
         </div>
+
 
         <div class="answer-inputs">
 
@@ -700,27 +643,37 @@ details p{
 
         </div>
 
+
         <div>
 
             <button
                 class="primary"
                 onclick="checkAnswer()">
+
                 ✓ Periksa Jawaban
+
             </button>
+
 
             <button
                 class="success"
                 onclick="nextQuestion()">
+
                 ➜ Soal Berikutnya
+
             </button>
+
 
             <button
                 class="gray"
                 onclick="resetGame()">
+
                 ↻ Mulai Lagi
+
             </button>
 
         </div>
+
 
         <div
             class="feedback"
@@ -732,9 +685,7 @@ details p{
 </div>
 
 
-<!-- =========================
-     PETUNJUK
-========================= -->
+<!-- PETUNJUK -->
 
 <details>
 
@@ -753,22 +704,24 @@ details p{
         </li>
 
         <li>
-            Klik <b>Samakan Potongan</b> untuk membuat
-            jumlah bagian kedua lingkaran sama.
+            Klik <b>Samakan Potongan</b>.
         </li>
 
         <li>
-            Klik <b>Gabungkan</b> untuk menggabungkan
-            kedua pecahan.
+            Kedua lingkaran akan memiliki jumlah
+            potongan yang sama.
         </li>
 
         <li>
-            Klik <b>Hitung Bagian</b> untuk menghitung
-            banyak bagian yang diarsir.
+            Klik <b>Gabungkan</b>.
         </li>
 
         <li>
-            Masukkan pembilang dan penyebut hasilnya.
+            Klik <b>Hitung Bagian</b>.
+        </li>
+
+        <li>
+            Masukkan hasil penjumlahan.
         </li>
 
     </ol>
@@ -783,28 +736,16 @@ details p{
     </summary>
 
     <p>
-        Jika penyebut berbeda, pecahan harus diubah
-        menjadi pecahan senilai terlebih dahulu.
-    </p>
-
-    <p>
-        Contoh:
+        Jika penyebut berbeda, kita harus mencari
+        penyebut yang sama terlebih dahulu.
     </p>
 
     <p style="text-align:center;font-size:21px;font-weight:bold;">
         1/2 + 1/4
     </p>
 
-    <p>
-        Penyebut 2 dan 4 disamakan menjadi 4:
-    </p>
-
     <p style="text-align:center;font-size:21px;font-weight:bold;">
         2/4 + 1/4
-    </p>
-
-    <p>
-        Kemudian bagian yang diarsir digabung:
     </p>
 
     <p style="text-align:center;font-size:21px;font-weight:bold;">
@@ -818,29 +759,67 @@ details p{
 
 <script>
 
-/* =========================================
-   VARIABEL GAME
-========================================= */
+/* ==========================================
+   VARIABEL
+========================================== */
 
-let n1;
-let d1;
-let n2;
-let d2;
+let n1 = 0;
+let d1 = 1;
 
-let commonDenominator;
+let n2 = 0;
+let d2 = 1;
+
+let commonDenominator = 1;
 
 let score = 0;
 let correctCount = 0;
 let questionNumber = 1;
 
 let currentStage = 1;
-
 let answered = false;
 
 
-/* =========================================
+/* ==========================================
+   ELEMENT
+========================================== */
+
+const expression =
+    document.getElementById("expression");
+
+const instruction =
+    document.getElementById("instruction");
+
+const processExpression =
+    document.getElementById("processExpression");
+
+const visualArea =
+    document.getElementById("visualArea");
+
+const equalButton =
+    document.getElementById("equalButton");
+
+const combineButton =
+    document.getElementById("combineButton");
+
+const countButton =
+    document.getElementById("countButton");
+
+const answerArea =
+    document.getElementById("answerArea");
+
+const feedback =
+    document.getElementById("feedback");
+
+const numeratorInput =
+    document.getElementById("numerator");
+
+const denominatorInput =
+    document.getElementById("denominator");
+
+
+/* ==========================================
    FPB
-========================================= */
+========================================== */
 
 function gcd(a,b){
 
@@ -857,12 +836,13 @@ function gcd(a,b){
     }
 
     return a;
+
 }
 
 
-/* =========================================
+/* ==========================================
    KPK
-========================================= */
+========================================== */
 
 function lcm(a,b){
 
@@ -871,13 +851,13 @@ function lcm(a,b){
 }
 
 
-/* =========================================
+/* ==========================================
    SEDERHANAKAN
-========================================= */
+========================================== */
 
 function simplify(num,den){
 
-    let g = gcd(num,den);
+    const g = gcd(num,den);
 
     return {
         numerator:num/g,
@@ -887,9 +867,9 @@ function simplify(num,den){
 }
 
 
-/* =========================================
+/* ==========================================
    FORMAT PECAHAN
-========================================= */
+========================================== */
 
 function fractionHTML(num,den){
 
@@ -910,16 +890,16 @@ function fractionHTML(num,den){
 }
 
 
-/* =========================================
-   GENERATE SOAL
-========================================= */
+/* ==========================================
+   RANDOM PECAHAN
+========================================== */
 
 function randomFraction(){
 
-    let denominator =
+    const denominator =
         Math.floor(Math.random()*5)+2;
 
-    let numerator =
+    const numerator =
         Math.floor(
             Math.random()*(denominator-1)
         )+1;
@@ -932,25 +912,160 @@ function randomFraction(){
 }
 
 
-/* =========================================
+/* ==========================================
+   MEMBUAT STRUKTUR AWAL
+========================================== */
+
+function restoreInitialVisual(){
+
+    /*
+       PENTING:
+       Setiap soal baru selalu mengembalikan
+       dua lingkaran seperti kondisi awal.
+    */
+
+    visualArea.innerHTML = `
+
+        <div class="circle-box">
+
+            <div
+                class="circle-title"
+                id="title1">
+                Pecahan Pertama
+            </div>
+
+            <canvas
+                id="circle1"
+                width="500"
+                height="500">
+            </canvas>
+
+            <div
+                class="circle-info"
+                id="info1">
+            </div>
+
+        </div>
+
+
+        <div class="arrow">
+            +
+        </div>
+
+
+        <div class="circle-box">
+
+            <div
+                class="circle-title"
+                id="title2">
+                Pecahan Kedua
+            </div>
+
+            <canvas
+                id="circle2"
+                width="500"
+                height="500">
+            </canvas>
+
+            <div
+                class="circle-info"
+                id="info2">
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================
+   RESET TAHAP
+========================================== */
+
+function resetStages(){
+
+    for(let i=1;i<=5;i++){
+
+        document
+            .getElementById("step"+i)
+            .classList.remove(
+                "active",
+                "done"
+            );
+
+    }
+
+    document
+        .getElementById("step1")
+        .classList.add("active");
+
+}
+
+
+/* ==========================================
+   RESET TOMBOL
+========================================== */
+
+function resetButtons(){
+
+    equalButton.disabled = false;
+
+    combineButton.disabled = true;
+
+    countButton.disabled = true;
+
+}
+
+
+/* ==========================================
    SOAL BARU
-========================================= */
+========================================== */
 
 function newQuestion(){
 
-    let f1;
-    let f2;
+    /*
+       ================================
+       RESET TOTAL
+       ================================
+    */
 
-    do{
+    currentStage = 1;
 
-        f1 = randomFraction();
-        f2 = randomFraction();
+    answered = false;
 
-    }while(
-        f1.denominator === f2.denominator
-        &&
-        f1.numerator === f2.numerator
-    );
+    resetStages();
+
+    resetButtons();
+
+    /*
+       Kembalikan visual ke dua lingkaran.
+    */
+
+    restoreInitialVisual();
+
+
+    /*
+       Bersihkan jawaban lama.
+    */
+
+    numeratorInput.value = "";
+
+    denominatorInput.value = "";
+
+    feedback.textContent = "";
+
+    feedback.className = "feedback";
+
+    answerArea.classList.add("hidden");
+
+
+    /*
+       Buat pecahan baru.
+    */
+
+    let f1 = randomFraction();
+    let f2 = randomFraction();
 
 
     n1 = f1.numerator;
@@ -960,17 +1075,19 @@ function newQuestion(){
     d2 = f2.denominator;
 
 
+    /*
+       Cari KPK.
+    */
+
     commonDenominator =
         lcm(d1,d2);
 
 
-    currentStage = 1;
+    /*
+       Tampilkan soal.
+    */
 
-    answered = false;
-
-
-    document.getElementById("expression")
-        .innerHTML =
+    expression.innerHTML =
         fractionHTML(n1,d1)
         +
         " + "
@@ -978,20 +1095,33 @@ function newQuestion(){
         fractionHTML(n2,d2);
 
 
-    document.getElementById("instruction")
-        .innerHTML =
-        "👀 <b>Tahap 1:</b> Perhatikan kedua pecahan. " +
-        "Lihat berapa bagian lingkaran yang diarsir.";
+    /*
+       Instruksi tahap 1.
+    */
+
+    instruction.innerHTML =
+        `
+        👀 <b>Tahap 1:</b>
+        Perhatikan kedua pecahan.
+        Lihat berapa bagian lingkaran yang diarsir.
+        `;
 
 
-    document.getElementById("processExpression")
-        .innerHTML =
+    /*
+       Proses awal.
+    */
+
+    processExpression.innerHTML =
         fractionHTML(n1,d1)
         +
         " + "
         +
         fractionHTML(n2,d2);
 
+
+    /*
+       Gambar lingkaran.
+    */
 
     drawCircle(
         "circle1",
@@ -999,7 +1129,6 @@ function newQuestion(){
         d1,
         "#3b82f6"
     );
-
 
     drawCircle(
         "circle2",
@@ -1018,63 +1147,27 @@ function newQuestion(){
         .textContent =
         `${n2} dari ${d2} bagian`;
 
-
-    document.getElementById("equalButton")
-        .disabled = false;
-
-    document.getElementById("combineButton")
-        .disabled = true;
-
-    document.getElementById("countButton")
-        .disabled = true;
-
-
-    document.getElementById("answerArea")
-        .classList.add("hidden");
-
-
-    resetSteps();
-
-
-    document.getElementById("step1")
-        .classList.add("active");
-
 }
 
 
-/* =========================================
-   RESET TAHAP
-========================================= */
-
-function resetSteps(){
-
-    for(let i=1;i<=5;i++){
-
-        document.getElementById("step"+i)
-            .classList.remove(
-                "active",
-                "done"
-            );
-
-    }
-
-}
-
-
-/* =========================================
+/* ==========================================
    GAMBAR LINGKARAN
-========================================= */
+========================================== */
 
 function drawCircle(
     canvasId,
     numerator,
     denominator,
-    color,
-    highlightCount = numerator
+    color
 ){
 
     const canvas =
         document.getElementById(canvasId);
+
+    if(!canvas){
+        return;
+    }
+
 
     const ctx =
         canvas.getContext("2d");
@@ -1084,11 +1177,12 @@ function drawCircle(
     const cy = 250;
     const radius = 215;
 
+
     ctx.clearRect(
         0,
         0,
-        canvas.width,
-        canvas.height
+        500,
+        500
     );
 
 
@@ -1112,19 +1206,23 @@ function drawCircle(
 
 
     /*
-       Bagian yang diarsir
+       Besar setiap potongan
     */
 
-    const angle =
+    const slice =
         Math.PI*2/denominator;
 
     const start =
         -Math.PI/2;
 
 
+    /*
+       Arsiran
+    */
+
     for(
         let i=0;
-        i<highlightCount;
+        i<numerator;
         i++
     ){
 
@@ -1136,8 +1234,8 @@ function drawCircle(
             cx,
             cy,
             radius,
-            start+i*angle,
-            start+(i+1)*angle
+            start+i*slice,
+            start+(i+1)*slice
         );
 
         ctx.closePath();
@@ -1154,7 +1252,7 @@ function drawCircle(
 
 
     /*
-       Garis pembagian
+       Garis potongan
     */
 
     ctx.strokeStyle = "#334155";
@@ -1168,15 +1266,20 @@ function drawCircle(
         i++
     ){
 
-        const a =
-            start+i*angle;
+        const angle =
+            start+i*slice;
 
 
         const x =
-            cx+radius*Math.cos(a);
+            cx+
+            radius*
+            Math.cos(angle);
+
 
         const y =
-            cy+radius*Math.sin(a);
+            cy+
+            radius*
+            Math.sin(angle);
 
 
         ctx.beginPath();
@@ -1209,10 +1312,10 @@ function drawCircle(
 }
 
 
-/* =========================================
+/* ==========================================
    TAHAP 2
-   SAMAKAN PENYEBUT
-========================================= */
+   SAMAKAN POTONGAN
+========================================== */
 
 function equalizeDenominator(){
 
@@ -1224,12 +1327,13 @@ function equalizeDenominator(){
     currentStage = 2;
 
 
-    let newN1 =
-        n1 *
+    const newN1 =
+        n1*
         (commonDenominator/d1);
 
-    let newN2 =
-        n2 *
+
+    const newN2 =
+        n2*
         (commonDenominator/d2);
 
 
@@ -1251,37 +1355,53 @@ function equalizeDenominator(){
 
     document.getElementById("info1")
         .innerHTML =
-        `${newN1} dari ${commonDenominator} bagian<br>
-         = ${fractionHTML(newN1,commonDenominator)}`;
+        `
+        ${fractionHTML(
+            newN1,
+            commonDenominator
+        )}
+        `;
 
 
     document.getElementById("info2")
         .innerHTML =
-        `${newN2} dari ${commonDenominator} bagian<br>
-         = ${fractionHTML(newN2,commonDenominator)}`;
+        `
+        ${fractionHTML(
+            newN2,
+            commonDenominator
+        )}
+        `;
 
 
-    document.getElementById("instruction")
-        .innerHTML =
-        "🔄 <b>Tahap 2:</b> Kedua lingkaran sekarang " +
-        "memiliki jumlah potongan yang sama.";
+    instruction.innerHTML =
+        `
+        🔄 <b>Tahap 2:</b>
+        Kedua pecahan sekarang memiliki
+        jumlah potongan yang sama.
+        `;
 
 
-    document.getElementById("processExpression")
-        .innerHTML =
-        fractionHTML(newN1,commonDenominator)
+    processExpression.innerHTML =
+        fractionHTML(
+            newN1,
+            commonDenominator
+        )
         +
         " + "
         +
-        fractionHTML(newN2,commonDenominator);
+        fractionHTML(
+            newN2,
+            commonDenominator
+        );
 
 
-    document.getElementById("equalButton")
-        .disabled = true;
+    equalButton.disabled = true;
 
-    document.getElementById("combineButton")
-        .disabled = false;
+    combineButton.disabled = false;
 
+
+    document.getElementById("step1")
+        .classList.remove("active");
 
     document.getElementById("step1")
         .classList.add("done");
@@ -1292,10 +1412,10 @@ function equalizeDenominator(){
 }
 
 
-/* =========================================
+/* ==========================================
    TAHAP 3
    GABUNGKAN
-========================================= */
+========================================== */
 
 function combineFractions(){
 
@@ -1307,20 +1427,25 @@ function combineFractions(){
     currentStage = 3;
 
 
-    let newN1 =
-        n1 *
+    const newN1 =
+        n1*
         (commonDenominator/d1);
 
-    let newN2 =
-        n2 *
+
+    const newN2 =
+        n2*
         (commonDenominator/d2);
 
-    let total =
-        newN1 + newN2;
+
+    const total =
+        newN1+newN2;
 
 
-    document.getElementById("visualArea")
-        .innerHTML = `
+    /*
+       Ganti visual menjadi satu lingkaran.
+    */
+
+    visualArea.innerHTML = `
 
         <div class="circle-box">
 
@@ -1345,34 +1470,43 @@ function combineFractions(){
 
 
     drawCombinedCircle(
-        total,
+        newN1,
+        newN2,
         commonDenominator
     );
 
 
-    document.getElementById("instruction")
-        .innerHTML =
-        "🧩 <b>Tahap 3:</b> Sekarang kedua pecahan " +
-        "digabungkan menjadi satu lingkaran.";
+    instruction.innerHTML =
+        `
+        🧩 <b>Tahap 3:</b>
+        Sekarang bagian dari kedua pecahan
+        digabungkan menjadi satu lingkaran.
+        `;
 
 
-    document.getElementById("processExpression")
-        .innerHTML =
-        fractionHTML(newN1,commonDenominator)
+    processExpression.innerHTML =
+        fractionHTML(
+            newN1,
+            commonDenominator
+        )
         +
         " + "
         +
-        fractionHTML(newN2,commonDenominator)
+        fractionHTML(
+            newN2,
+            commonDenominator
+        )
         +
         " = ?";
+        
+
+    combineButton.disabled = true;
+
+    countButton.disabled = false;
 
 
-    document.getElementById("combineButton")
-        .disabled = true;
-
-    document.getElementById("countButton")
-        .disabled = false;
-
+    document.getElementById("step2")
+        .classList.remove("active");
 
     document.getElementById("step2")
         .classList.add("done");
@@ -1383,12 +1517,13 @@ function combineFractions(){
 }
 
 
-/* =========================================
+/* ==========================================
    GAMBAR LINGKARAN GABUNGAN
-========================================= */
+========================================== */
 
 function drawCombinedCircle(
-    total,
+    first,
+    second,
     denominator
 ){
 
@@ -1412,7 +1547,7 @@ function drawCombinedCircle(
     );
 
 
-    const angle =
+    const slice =
         Math.PI*2/denominator;
 
     const start =
@@ -1420,12 +1555,8 @@ function drawCombinedCircle(
 
 
     /*
-       Bagian pertama
+       Pecahan pertama
     */
-
-    let first =
-        n1*(commonDenominator/d1);
-
 
     for(
         let i=0;
@@ -1441,8 +1572,8 @@ function drawCombinedCircle(
             cx,
             cy,
             radius,
-            start+i*angle,
-            start+(i+1)*angle
+            start+i*slice,
+            start+(i+1)*slice
         );
 
         ctx.closePath();
@@ -1455,12 +1586,12 @@ function drawCombinedCircle(
 
 
     /*
-       Bagian kedua
+       Pecahan kedua
     */
 
     for(
         let i=first;
-        i<total;
+        i<first+second;
         i++
     ){
 
@@ -1472,8 +1603,8 @@ function drawCombinedCircle(
             cx,
             cy,
             radius,
-            start+i*angle,
-            start+(i+1)*angle
+            start+i*slice,
+            start+(i+1)*slice
         );
 
         ctx.closePath();
@@ -1486,7 +1617,7 @@ function drawCombinedCircle(
 
 
     /*
-       Garis
+       Garis potongan
     */
 
     ctx.strokeStyle="#334155";
@@ -1500,14 +1631,20 @@ function drawCombinedCircle(
         i++
     ){
 
-        let a =
-            start+i*angle;
+        const angle =
+            start+i*slice;
 
-        let x =
-            cx+radius*Math.cos(a);
 
-        let y =
-            cy+radius*Math.sin(a);
+        const x =
+            cx+
+            radius*
+            Math.cos(angle);
+
+
+        const y =
+            cy+
+            radius*
+            Math.sin(angle);
 
 
         ctx.beginPath();
@@ -1520,6 +1657,10 @@ function drawCombinedCircle(
 
     }
 
+
+    /*
+       Lingkaran luar
+    */
 
     ctx.beginPath();
 
@@ -1536,16 +1677,20 @@ function drawCombinedCircle(
 
     document.getElementById("combinedInfo")
         .innerHTML =
-        `Ada <b>${total}</b> bagian yang diarsir<br>
-         dari <b>${denominator}</b> bagian`;
+        `
+        ${first + second}
+        dari
+        ${denominator}
+        bagian diarsir
+        `;
 
 }
 
 
-/* =========================================
+/* ==========================================
    TAHAP 4
-   HITUNG
-========================================= */
+   HITUNG BAGIAN
+========================================== */
 
 function showCounting(){
 
@@ -1557,43 +1702,58 @@ function showCounting(){
     currentStage = 4;
 
 
-    let newN1 =
-        n1*(commonDenominator/d1);
+    const newN1 =
+        n1*
+        (commonDenominator/d1);
 
-    let newN2 =
-        n2*(commonDenominator/d2);
 
-    let total =
+    const newN2 =
+        n2*
+        (commonDenominator/d2);
+
+
+    const total =
         newN1+newN2;
 
 
-    document.getElementById("instruction")
-        .innerHTML =
-        `🔢 <b>Tahap 4:</b> Hitung bagian yang diarsir. 
-        Ada <b>${total}</b> bagian dari 
-        <b>${commonDenominator}</b> bagian.`;
+    instruction.innerHTML =
+        `
+        🔢 <b>Tahap 4:</b>
+        Hitung bagian yang diarsir.
+        Ada <b>${total}</b> bagian dari
+        <b>${commonDenominator}</b> bagian.
+        `;
 
 
-    document.getElementById("processExpression")
-        .innerHTML =
-        fractionHTML(newN1,commonDenominator)
+    processExpression.innerHTML =
+        fractionHTML(
+            newN1,
+            commonDenominator
+        )
         +
         " + "
         +
-        fractionHTML(newN2,commonDenominator)
+        fractionHTML(
+            newN2,
+            commonDenominator
+        )
         +
         " = "
         +
-        fractionHTML(total,commonDenominator);
+        fractionHTML(
+            total,
+            commonDenominator
+        );
 
 
-    document.getElementById("countButton")
-        .disabled = true;
+    countButton.disabled = true;
 
 
-    document.getElementById("answerArea")
-        .classList.remove("hidden");
+    answerArea.classList.remove("hidden");
 
+
+    document.getElementById("step3")
+        .classList.remove("active");
 
     document.getElementById("step3")
         .classList.add("done");
@@ -1607,9 +1767,9 @@ function showCounting(){
 }
 
 
-/* =========================================
+/* ==========================================
    CEK JAWABAN
-========================================= */
+========================================== */
 
 function checkAnswer(){
 
@@ -1618,20 +1778,16 @@ function checkAnswer(){
     }
 
 
-    let userNum =
+    const userNum =
         parseInt(
-            document.getElementById("numerator").value
+            numeratorInput.value
         );
 
 
-    let userDen =
+    const userDen =
         parseInt(
-            document.getElementById("denominator").value
+            denominatorInput.value
         );
-
-
-    let feedback =
-        document.getElementById("feedback");
 
 
     if(
@@ -1639,7 +1795,7 @@ function checkAnswer(){
         ||
         isNaN(userDen)
         ||
-        userDen===0
+        userDen === 0
     ){
 
         feedback.innerHTML =
@@ -1649,43 +1805,52 @@ function checkAnswer(){
             "feedback wrong";
 
         return;
+
     }
 
 
     /*
-       Hasil sebenarnya
+       Hasil penjumlahan
     */
 
-    let resultNum =
+    const resultNum =
         n1*d2+n2*d1;
 
-    let resultDen =
+
+    const resultDen =
         d1*d2;
 
 
-    let result =
+    const result =
         simplify(
             resultNum,
             resultDen
         );
 
 
-    let user =
+    const user =
         simplify(
             userNum,
             userDen
         );
 
 
+    /*
+       Jawaban benar
+    */
+
     if(
-        user.numerator===result.numerator
+        user.numerator === result.numerator
         &&
-        user.denominator===result.denominator
+        user.denominator === result.denominator
     ){
 
-        score+=10;
+        score += 10;
 
         correctCount++;
+
+        answered = true;
+
 
         feedback.innerHTML =
             "🎉 <b>Benar!</b> Kamu berhasil menjumlahkan pecahan.";
@@ -1693,23 +1858,27 @@ function checkAnswer(){
         feedback.className =
             "feedback correct";
 
-        answered=true;
 
+        document.getElementById("step5")
+            .classList.remove("active");
 
         document.getElementById("step5")
             .classList.add("done");
 
 
         document.getElementById("score")
-            .textContent=score;
+            .textContent = score;
+
 
         document.getElementById("correctCount")
-            .textContent=correctCount;
+            .textContent = correctCount;
 
-    }else{
+    }
+
+    else{
 
         feedback.innerHTML =
-            "❌ <b>Belum tepat.</b> Perhatikan kembali proses penyamaan potongan.";
+            "❌ <b>Belum tepat.</b> Perhatikan kembali proses penjumlahan.";
 
         feedback.className =
             "feedback wrong";
@@ -1719,51 +1888,72 @@ function checkAnswer(){
 }
 
 
-/* =========================================
+/* ==========================================
    SOAL BERIKUTNYA
-========================================= */
+========================================== */
 
 function nextQuestion(){
 
+    /*
+       Tambah nomor soal
+    */
+
     questionNumber++;
 
+
     document.getElementById("questionNumber")
-        .textContent=questionNumber;
+        .textContent =
+        questionNumber;
+
+
+    /*
+       PANGGIL NEW QUESTION.
+       
+       Fungsi ini sekarang melakukan RESET TOTAL:
+       - tahap kembali 1
+       - dua lingkaran dibuat kembali
+       - tombol direset
+       - jawaban dihapus
+       - proses lama dihapus
+       - soal baru dibuat
+    */
 
     newQuestion();
 
 }
 
 
-/* =========================================
-   RESET
-========================================= */
+/* ==========================================
+   RESET GAME
+========================================== */
 
 function resetGame(){
 
-    score=0;
+    score = 0;
 
-    correctCount=0;
+    correctCount = 0;
 
-    questionNumber=1;
+    questionNumber = 1;
+
 
     document.getElementById("score")
-        .textContent=score;
+        .textContent = score;
 
     document.getElementById("correctCount")
-        .textContent=correctCount;
+        .textContent = correctCount;
 
     document.getElementById("questionNumber")
-        .textContent=questionNumber;
+        .textContent = questionNumber;
+
 
     newQuestion();
 
 }
 
 
-/* =========================================
+/* ==========================================
    MULAI
-========================================= */
+========================================== */
 
 newQuestion();
 
@@ -1771,4 +1961,3 @@ newQuestion();
 
 </body>
 </html>
-```
